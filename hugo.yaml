@@ -1,0 +1,128 @@
+baseURL: "http://35.208.201.12/"
+locale: "zh-cn"
+title: "LifeOS"
+theme: "PaperMod"
+
+# Enable RSS
+enableRobotsTXT: true
+enableEmoji: true
+
+# Build options
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+# Minification
+minify:
+  disableXML: true
+  minifyOutput: true
+
+# Menu
+menu:
+  main:
+    - identifier: archives
+      name: 归档
+      url: /archives/
+      weight: 10
+    - identifier: search
+      name: 搜索
+      url: /search/
+      weight: 20
+    - identifier: tags
+      name: 标签
+      url: /tags/
+      weight: 30
+    - identifier: about
+      name: 关于
+      url: /about/
+      weight: 40
+
+# Output formats
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+params:
+  env: production
+  title: LifeOS
+  description: "记录思考，构建影响力"
+  keywords: [blog, tech, life, thinking, personal]
+  author: "Ajing"
+
+  # Default theme: auto (system), dark, light
+  defaultTheme: auto
+  disableThemeToggle: false
+
+  # Profile/homepage mode
+  ShowReadingTime: true
+  ShowShareButtons: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowWordCount: true
+  ShowRssButtonInSectionTermList: true
+  ShowFullTextinRSS: false
+  ShowToc: true
+  TocOpen: false
+
+  # Homepage
+  homeInfoParams:
+    Title: "你好，我是 Ajing 👋"
+    Content: |
+      欢迎来到我的个人博客。
+
+      这里记录我对技术、产品和生活的思考。
+
+      写作是为了更好地思考，分享是为了更好地连接。
+
+  # Social icons
+  socialIcons:
+    - name: github
+      url: "https://github.com/"
+    - name: twitter
+      url: "https://twitter.com/"
+    - name: rss
+      url: "index.xml"
+
+  # Search (using Fuse.js)
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    location: 0
+    distance: 1000
+    threshold: 0.4
+    minMatchCharLength: 0
+    keys: ["title", "permalink", "summary", "content"]
+
+  # Analytics (optional, add later)
+  # googleAnalyticsID: "G-XXXXXXXXXX"
+
+  # Comments (optional, add later)
+  # giscus:
+  #   repo: ""
+  #   repoID: ""
+  #   category: ""
+  #   categoryID: ""
+
+# Taxonomies
+taxonomies:
+  category: categories
+  tag: tags
+  series: series
+
+# Privacy settings
+privacy:
+  disqus:
+    disable: true
+  googleAnalytics:
+    disable: true
+  instagram:
+    disable: true
+  x:
+    disable: true
+  vimeo:
+    disable: true
+  youtube:
+    disable: true

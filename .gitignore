@@ -1,0 +1,26 @@
+# Hugo build output
+/public/
+/resources/
+
+# Generated files by Hugo
+.hugo_build.lock
+
+# Hugo stats
+/hugo_stats.json
+
+# Dependencies
+/node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.log
