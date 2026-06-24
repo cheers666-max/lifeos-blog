@@ -1,0 +1,41 @@
+media:
+  - name: post-media
+    label: 文章图片
+    input: content/posts
+    output: ""
+    extensions: [png, jpg, jpeg, gif, webp, svg]
+
+content:
+  - name: posts
+    label: 博客文章
+    type: collection
+    path: content/posts
+    filename: "{primary}/index.md"
+    view:
+      layout: tree
+      fields: [title, date]
+    fields:
+      - { name: title, label: 标题, type: string }
+      - name: date
+        label: 日期
+        type: date
+        options: { format: "yyyy-MM-dd", time: false }
+      - { name: description, label: 描述(SEO 摘要), type: text }
+      - { name: summary, label: 列表摘要, type: text }
+      - { name: tags, label: 标签, type: string, list: true }
+      - { name: categories, label: 分类, type: string, list: true }
+      - { name: series, label: 系列, type: string, list: true }
+      - { name: ShowToc, label: 显示目录, type: boolean, default: true }
+      - { name: TocOpen, label: 目录默认展开, type: boolean, default: false }
+      - { name: math, label: 启用数学公式(KaTeX), type: boolean, default: true }
+      - name: cover
+        label: 封面
+        type: object
+        fields:
+          - { name: image, label: 图片文件名, type: string }
+          - { name: alt, label: alt 描述, type: string }
+          - { name: caption, label: 图注, type: string }
+      - name: body
+        label: 正文(Markdown 原文,保留 figure 短代码与 $公式$)
+        type: code
+        options: { language: markdown }
