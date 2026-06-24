@@ -126,3 +126,17 @@ privacy:
     disable: true
   youtube:
     disable: true
+
+# 数学渲染(KaTeX):passthrough 把 $...$ / $$...$$ 原样放行,交给客户端 KaTeX 渲染
+markup:
+  goldmark:
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          inline:
+            - ["$", "$"]
+            - ["\\(", "\\)"]
+          block:
+            - ["$$", "$$"]
+            - ["\\[", "\\]"]
