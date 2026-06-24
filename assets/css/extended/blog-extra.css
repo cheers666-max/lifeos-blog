@@ -1,0 +1,17 @@
+/* 自定义样式(PaperMod 自动加载 assets/css/extended/*.css) */
+
+/* 图片与图注居中 */
+figure {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+figure img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+figure figcaption {
+  text-align: center;
+  margin-top: 0.4em;
+}
