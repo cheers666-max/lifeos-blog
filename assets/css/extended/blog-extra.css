@@ -13,5 +13,14 @@ figure img {
 }
 figure figcaption {
   text-align: center;
-  margin-top: 0.4em;
+  margin-top: 0.5em;
+  font-size: 0.86em;
+  color: var(--secondary);
+}
+
+/* 图片限宽,避免 2048px 原图撑满 */
+figure img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
 }
