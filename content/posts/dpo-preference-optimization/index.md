@@ -178,29 +178,37 @@ $$
 
 {{< figure src="09-bt-ruler.png" alt="小黑把一堆 A>B 卡片拼成一条分数尺" caption="BT 的活儿:把散乱的「A>B」拼成一条统一分数尺,r* 就是每个回答在尺上的位置" >}}
 
-那这套分数 `r*` 怎么定下来?用**最大似然估计**:调分数,让"你标的偏好全被排对"的概率最大。这一步训出来的东西,就叫**奖励模型**——RLHF 的常规做法正是先训它,再拿它去跑强化学习。
+那这套分数 `r*` 怎么定下来?用**最大似然估计(MLE)**:调 α,让"你给的这批战绩最可能发生"。下面用一组真数字,**先把要优化的 `ln L` 讲清楚,再一步步反推出实力**。
 
 ### 算一遍:从一堆战绩,反推出实力排名
 
-光说没感觉,代一组真数字。设三个选手两两对战:**A 对 B 8 胜 4 负;A 对 C 3 胜 5 负**。给每人一个实力分 $\alpha>0$,胜率 = 自己分 ÷ 两人分之和(这就是 BT 的 $\alpha$ 版,和前面 $\sigma$ 版是一回事:令 $\alpha=e^{r}$ 就有 $\tfrac{\alpha_i}{\alpha_i+\alpha_j}=\sigma(r_i-r_j)$)。BT 要找的,是让"这些战绩最可能发生"的那组 $\alpha$,也就是**最大化对数似然 $\ln L$**。
+**战绩**:三个选手两两对战,**A 对 B 8 胜 4 负;A 对 C 3 胜 5 负**。给每人一个实力分 $\alpha>0$,胜率 = 自己分 ÷ 两人分之和(这就是 BT 的 $\alpha$ 版,和前面 $\sigma$ 版是同一个东西——$\alpha$ 只是 $e^{r}$ 的别名:令 $\alpha=e^{r}$ 就有 $\tfrac{\alpha_i}{\alpha_i+\alpha_j}=\sigma(r_i-r_j)$)。
 
-因为 B、C 都只和 A 打,可以直接解出来(固定 $\alpha_A=1$ 当基准):
+**① 先讲清要最大化的是什么:`ln L`(对数似然)。** 它衡量"这组实力分有多符合战绩"——把**每场结果的胜率取 log,按发生次数加起来**:
+
+$$
+\ln L = 8\ln\tfrac{\alpha_A}{\alpha_A+\alpha_B} + 4\ln\tfrac{\alpha_B}{\alpha_A+\alpha_B} + 3\ln\tfrac{\alpha_A}{\alpha_A+\alpha_C} + 5\ln\tfrac{\alpha_C}{\alpha_A+\alpha_C}
+$$
+
+四项分别对应:A 赢 B 8 次、B 赢 A 4 次、A 赢 C 3 次、C 赢 A 5 次;**每项 = 那种结果的胜率取 log × 它发生的次数**。$\ln L$ 越大,这组 α 越"解释得通"这批战绩。
+
+**② 目标**:BT 就是调 α,**让 $\ln L$ 最大**——这就是"最大似然"。
+
+**③ 怎么找这个最大?** 这个例子很特殊:B、C 都只跟 A 打,可以直接解——**对只跟一个对手打的选手,最优 α 就是让"模型预测的胜率"正好等于"实际胜率"**。固定 $\alpha_A=1$ 当基准:
 
 $$
 \begin{aligned}
-\text{A 对 B 胜率} &= \tfrac{8}{12}=0.667 \;\Rightarrow\; \alpha_B=\alpha_A\cdot\tfrac{4}{8}=0.5 \\
-\text{A 对 C 胜率} &= \tfrac{3}{8}=0.375 \;\Rightarrow\; \alpha_C=\alpha_A\cdot\tfrac{5}{3}=1.667
+\text{A 对 B 实际胜率} &= \tfrac{8}{12}=0.667 \;\Rightarrow\; \tfrac{\alpha_A}{\alpha_A+\alpha_B}=0.667 \;\Rightarrow\; \alpha_B=0.5 \\
+\text{A 对 C 实际胜率} &= \tfrac{3}{8}=0.375 \;\Rightarrow\; \tfrac{\alpha_A}{\alpha_A+\alpha_C}=0.375 \;\Rightarrow\; \alpha_C=1.667
 \end{aligned}
 $$
 
-代进对数似然,一行行化简:
+**④ 代回验证**:把这组 α 代进 ① 的 $\ln L$:
 
 $$
 \begin{aligned}
-\ln L &= 8\ln\tfrac{\alpha_A}{\alpha_A+\alpha_B} + 4\ln\tfrac{\alpha_B}{\alpha_A+\alpha_B} + 3\ln\tfrac{\alpha_A}{\alpha_A+\alpha_C} + 5\ln\tfrac{\alpha_C}{\alpha_A+\alpha_C} \\
-      &= 8\ln 0.667 + 4\ln 0.333 + 3\ln 0.375 + 5\ln 0.625 \\
-      &= -3.24 - 4.40 - 2.94 - 2.35 \\
-      &= -12.93
+\ln L &= 8\ln 0.667 + 4\ln 0.333 + 3\ln 0.375 + 5\ln 0.625 \\
+      &= -3.24 - 4.40 - 2.94 - 2.35 = -12.93
 \end{aligned}
 $$
 
@@ -214,7 +222,7 @@ $$
 | C 赢 A ×5 | 5·ln(α_C/(α_A+α_C)) | 5·ln 0.625 | −2.35 |
 | **合计** | | | **ln L = −12.93** |
 
-对照"瞎猜三人一样强"(每人 α=1、每场胜率都 0.5):$\ln L = 20\times\ln 0.5 = -13.86$,明显更差。所以上面那组 α 更贴合战绩——这就是最大似然在挑的东西。
+对照"瞎猜三人一样强"(每人 α=1、每场胜率都 0.5):$\ln L = 20\times\ln 0.5 = -13.86$,比 −12.93 **小** → 我们解出的那组 α 确实让 $\ln L$ 更大、更贴战绩。这就是最大似然在挑的东西。
 
 **推出的实力排名:$\alpha_C(1.667) > \alpha_A(1) > \alpha_B(0.5)$。** 注意:A 把 B 打得挺惨,可 C 把 A 压着打,所以**最强是 C**。从一堆两两胜负,反推出一条全局实力尺——这正是 Bradley-Terry "把偏好变成分数"的本事。
 
