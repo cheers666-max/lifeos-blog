@@ -224,7 +224,7 @@ figure figcaption h4 {
 /* ── 10. 右侧固定目录（TOC Sidebar）── */
 .article-with-toc {
   display: flex;
-  gap: 2.5rem;
+  gap: clamp(1.5rem, 3vw, 3.5rem);
   align-items: flex-start;
   position: relative;
 }
@@ -232,18 +232,23 @@ figure figcaption h4 {
 .article-with-toc .post-single {
   flex: 1;
   min-width: 0;
-  max-width: 760px;
+  max-width: clamp(650px, 54vw, 900px);
+}
+
+/* 超宽屏进一步放宽 */
+@media screen and (min-width: 1600px) {
+  .article-with-toc .post-single { max-width: 950px; }
 }
 
 /* 侧边栏容器 */
 .toc-sidebar {
-  width: 220px;
+  width: clamp(190px, 16vw, 260px);
   flex-shrink: 0;
   position: sticky;
   top: calc(var(--header-height) + 2rem);
   max-height: calc(100vh - var(--header-height) - 4rem);
   overflow-y: auto;
-  font-size: 0.85em;
+  font-size: clamp(0.78em, 0.9vw, 0.88em);
   line-height: 1.6;
   scrollbar-width: thin;
   scrollbar-color: var(--tertiary) transparent;
@@ -329,9 +334,16 @@ figure figcaption h4 {
     flex-direction: column;
     gap: 1.5rem;
   }
+  .article-with-toc .post-single {
+    max-width: 100%;
+  }
   .toc-sidebar {
     display: none;
   }
+  .post-single > .toc {
+    display: block;
+  }
+}
   .post-single > .toc {
     display: block;
   }

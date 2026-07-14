@@ -6,12 +6,18 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
-/* ── CSS 变量覆写 ── */
+/* ── 流式自适应布局 ── */
 :root {
-  --main-width: 1100px;
+  --main-width: min(94vw, 1550px);
   --content-gap: 24px;
-  --gap: 28px;
+  --gap: clamp(20px, 3vw, 40px);
   --radius: 6px;
+}
+@media screen and (min-width: 1800px) {
+  :root { --main-width: 1600px; }
+}
+@media screen and (max-width: 768px) {
+  :root { --main-width: 100%; }
 }
 
 /* ── 全局字体栈 ── */
