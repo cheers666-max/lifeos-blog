@@ -140,3 +140,21 @@ markup:
           block:
             - ["$$", "$$"]
             - ["\\[", "\\]"]
+  highlight:
+    style: "github-dark"
+    noClasses: false
+    tabWidth: 2
+    lineNos: false
+    guessSyntax: true
+
+# 站点级默认值（可被单个页面的 front-matter 覆盖）
+cascade:
+  - _target:
+      kind: page
+    ShowToc: true
+    TocOpen: false
+    ShowReadingTime: true
+    ShowWordCount: true
+    ShowPostNavLinks: true
+    ShowBreadCrumbs: true
+    ShowCodeCopyButtons: true
