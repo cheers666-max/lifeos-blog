@@ -6,9 +6,7 @@
    ═══════════════════════════════════════════════════════════════ */
 
 /* ── 1. 全局节奏 ── */
-.main {
-  --main-width: 780px;
-}
+/* PaperMod 默认 main-width 已通过 extend_head 设为 1100px */
 
 .post-content {
   font-size: 1.04em;
@@ -226,7 +224,7 @@ figure figcaption h4 {
 /* ── 10. 右侧固定目录（TOC Sidebar）── */
 .article-with-toc {
   display: flex;
-  gap: 3rem;
+  gap: 2.5rem;
   align-items: flex-start;
   position: relative;
 }
@@ -234,27 +232,19 @@ figure figcaption h4 {
 .article-with-toc .post-single {
   flex: 1;
   min-width: 0;
-  max-width: 100%;
-}
-
-/* 移动端加左 padding，让它和 sidebar 出现时有同样的视觉节奏 */
-@media screen and (min-width: 1025px) {
-  .article-with-toc.has-toc {
-    /* 右侧目录固定宽度，左侧内容自适应 */;
-  }
+  max-width: 760px;
 }
 
 /* 侧边栏容器 */
 .toc-sidebar {
-  width: 240px;
+  width: 220px;
   flex-shrink: 0;
   position: sticky;
   top: calc(var(--header-height) + 2rem);
   max-height: calc(100vh - var(--header-height) - 4rem);
   overflow-y: auto;
-  font-size: 0.88em;
+  font-size: 0.85em;
   line-height: 1.6;
-  /* 滚动条美化 */
   scrollbar-width: thin;
   scrollbar-color: var(--tertiary) transparent;
 }
