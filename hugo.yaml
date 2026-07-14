@@ -140,6 +140,12 @@ markup:
           block:
             - ["$$", "$$"]
             - ["\\[", "\\]"]
+    renderer:
+      unsafe: true
+  tableOfContents:
+    startLevel: 2
+    endLevel: 3
+    ordered: false
   highlight:
     style: "github-dark"
     noClasses: false

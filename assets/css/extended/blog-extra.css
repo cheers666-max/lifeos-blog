@@ -223,24 +223,132 @@ figure figcaption h4 {
   color: #FB923C;
 }
 
-/* ── 10. 目录（TOC）── */
-.toc {
-  border-left: 3px solid var(--border);
-  padding-left: 1em;
-}
-.toc details {
-  background: none;
-}
-.toc a {
-  color: var(--secondary);
-  text-decoration: none;
-  transition: color 0.15s;
-}
-.toc a:hover {
-  color: #F97316;
+/* ── 10. 右侧固定目录（TOC Sidebar）── */
+.article-with-toc {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  position: relative;
 }
 
-[data-theme="dark"] .toc a:hover {
+.article-with-toc .post-single {
+  flex: 1;
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* 移动端加左 padding，让它和 sidebar 出现时有同样的视觉节奏 */
+@media screen and (min-width: 1025px) {
+  .article-with-toc.has-toc {
+    /* 右侧目录固定宽度，左侧内容自适应 */;
+  }
+}
+
+/* 侧边栏容器 */
+.toc-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  position: sticky;
+  top: calc(var(--header-height) + 2rem);
+  max-height: calc(100vh - var(--header-height) - 4rem);
+  overflow-y: auto;
+  font-size: 0.88em;
+  line-height: 1.6;
+  /* 滚动条美化 */
+  scrollbar-width: thin;
+  scrollbar-color: var(--tertiary) transparent;
+}
+.toc-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+.toc-sidebar::-webkit-scrollbar-thumb {
+  background: var(--tertiary);
+  border-radius: 2px;
+}
+
+.toc-sidebar-inner {
+  border-left: 2px solid var(--border);
+  padding-left: 1.2em;
+}
+
+/* 目录标题 */
+.toc-title {
+  font-size: 0.8em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--secondary);
+  margin-bottom: 0.8em;
+}
+
+/* ── Hugo 原生 TOC 样式覆盖 ── */
+.toc-nav nav#TableOfContents ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.toc-nav nav#TableOfContents > ul > li {
+  margin: 0;
+}
+.toc-nav nav#TableOfContents ul ul {
+  padding-left: 0.85em;
+  margin: 0;
+}
+.toc-nav nav#TableOfContents li {
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* 目录链接 */
+.toc-nav nav#TableOfContents a {
+  display: block;
+  padding: 0.28em 0;
+  color: var(--secondary);
+  text-decoration: none;
+  border-radius: 3px;
+  transition: color 0.15s, padding-left 0.15s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.toc-nav nav#TableOfContents a:hover,
+.toc-nav nav#TableOfContents a:focus {
+  color: #F97316;
+  padding-left: 0.3em;
+}
+
+/* 一级标题加粗 */
+.toc-nav nav#TableOfContents > ul > li > a {
+  font-weight: 600;
+  color: var(--primary);
+  font-size: 0.95em;
+}
+/* 二级标题（子项）更小 */
+.toc-nav nav#TableOfContents ul ul li > a {
+  font-size: 0.9em;
+}
+
+/* 隐藏旧版内嵌 TOC（PaperMod 默认的 details.toc） */
+.post-single > .toc {
+  display: none;
+}
+
+/* 移动端：隐藏侧边栏，恢复内嵌 TOC */
+@media screen and (max-width: 1024px) {
+  .article-with-toc {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .toc-sidebar {
+    display: none;
+  }
+  .post-single > .toc {
+    display: block;
+  }
+}
+
+[data-theme="dark"] .toc-nav nav#TableOfContents a:hover,
+[data-theme="dark"] .toc-nav nav#TableOfContents a:focus {
   color: #FB923C;
 }
 
