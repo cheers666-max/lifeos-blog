@@ -149,7 +149,7 @@ markup:
 
 # 站点级默认值（可被单个页面的 front-matter 覆盖）
 cascade:
-  - _target:
+  - target:
       kind: page
     ShowToc: true
     TocOpen: false
