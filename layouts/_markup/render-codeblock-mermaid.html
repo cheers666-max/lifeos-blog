@@ -1,0 +1,5 @@
+{{- /* Mermaid 代码块渲染钩子:```mermaid 转成 <pre class="mermaid">,交给客户端 mermaid.js */ -}}
+<pre class="mermaid">
+{{- .Inner | htmlEscape | safeHTML }}
+</pre>
+{{- .Page.Store.Set "hasMermaid" true }}
