@@ -1,0 +1,48 @@
+{{- define "main" }}
+<header class="page-header">
+  <h1>{{ .Title }}</h1>
+  {{- with .Description }}<div class="post-description">{{ . | markdownify }}</div>{{- end }}
+</header>
+
+{{- with .Content }}<div class="post-content md-content">{{ . }}</div>{{- end }}
+
+{{- $groups := site.Data.links }}
+{{- if $groups }}
+{{- range $groups }}
+{{- if .items }}
+<section class="link-group">
+  <div class="home-series-head">
+    <h2>{{ .group }}</h2>
+    {{- with .desc }}<span class="link-group-desc">{{ . }}</span>{{- end }}
+  </div>
+  <ul class="link-list">
+    {{- range .items }}
+    <li class="link-item">
+      <a class="link-name" href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .name }}</a>
+      <span class="link-host">{{ (urls.Parse .url).Host }}</span>
+      <p class="link-note">{{ .note | markdownify }}</p>
+    </li>
+    {{- end }}
+  </ul>
+</section>
+{{- end }}
+{{- end }}
+{{- else }}
+<p class="flows-empty">还没有推荐。往 <code>data/links.yaml</code> 里加就行。</p>
+{{- end }}
+
+{{- /* 板块里如果还有正经文章（长评），列在下面 */ -}}
+{{- with .RegularPages }}
+<section class="link-group">
+  <div class="home-series-head"><h2>深度点评</h2></div>
+  <ul class="link-list">
+    {{- range . }}
+    <li class="link-item">
+      <a class="link-name" href="{{ .RelPermalink }}">{{ .Title }}</a>
+      <p class="link-note">{{ .Summary | plainify | truncate 120 }}</p>
+    </li>
+    {{- end }}
+  </ul>
+</section>
+{{- end }}
+{{- end }}

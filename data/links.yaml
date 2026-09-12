@@ -1,0 +1,31 @@
+# 推荐清单：加一条就在对应分组下面加三行
+# name 名字 / url 链接 / note 我为什么推荐它（一句话，写具体，别写「很好用」）
+# 分组顺序就是页面显示顺序，想加新分组直接往下写
+
+- group: 博客
+  desc: 值得长期订阅的个人博客
+  items:
+    - name: 胡涂说
+      url: https://hutusi.com
+      note: 写了二十年的中文个人博客。把「想法的成熟度」做成了站点结构——心流、笔记、文章、合辑各有各的入口，是数字花园做得最扎实的中文样本。
+
+- group: 工具与框架
+  desc: 自己在用、能扛住真实负载的东西
+  items:
+    - name: Amytis
+      url: https://github.com/hutusi/amytis
+      note: 胡涂说自己写的数字花园框架，Next.js 16 + Tailwind v4。开箱带双链、backlinks、知识图谱和 Pagefind 搜索，想做知识库而不只是博客的可以直接用。
+
+# - group: 开源项目
+#   desc: 读过源码、学到东西的项目
+#   items:
+#     - name: 项目名
+#       url: https://github.com/xxx/yyy
+#       note: 具体推荐理由
+
+# - group: 书
+#   desc: 读完真的改变了我做事方式的
+#   items:
+#     - name: 书名
+#       url: https://book.douban.com/subject/xxx/
+#       note: 具体推荐理由

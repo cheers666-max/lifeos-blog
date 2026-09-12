@@ -4,7 +4,8 @@ date: 2025-06-16
 description: "整理了一批值得深度阅读的个人博客，涵盖技术、思考、读书笔记和生活方式。每篇作者都用独特的风格证明了：互联网上最好的东西往往来自个人。"
 summary: "一批值得长期关注的优秀个人博客，按风格分类，附带设计亮点和可借鉴之处"
 tags: ["writing", "reference", "blog-roll", "inspiration", "curation"]
-categories: ["参考"]
+categories: ["技术"]
+aliases: ["/reference/inspiring-blogs/"]
 ShowToc: true
 TocOpen: true
 ---
