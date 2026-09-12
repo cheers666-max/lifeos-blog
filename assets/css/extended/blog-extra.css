@@ -232,12 +232,16 @@ figure figcaption h4 {
 .article-with-toc .post-single {
   flex: 1;
   min-width: 0;
+}
+
+/* 限宽只在真有侧栏目录时生效，否则没 TOC 的页面会被压成半幅、右边空一大块 */
+.article-with-toc.has-toc .post-single {
   max-width: clamp(650px, 54vw, 900px);
 }
 
 /* 超宽屏进一步放宽 */
 @media screen and (min-width: 1600px) {
-  .article-with-toc .post-single { max-width: 950px; }
+  .article-with-toc.has-toc .post-single { max-width: 950px; }
 }
 
 /* 侧边栏容器 */
