@@ -20,6 +20,18 @@ minify:
 # Menu
 menu:
   main:
+    - identifier: flows
+      name: 心流
+      url: /flows/
+      weight: 1
+    - identifier: links
+      name: 推荐
+      url: /links/
+      weight: 6
+    - identifier: series
+      name: 系列
+      url: /series/
+      weight: 5
     - identifier: archives
       name: 归档
       url: /archives/
@@ -46,9 +58,11 @@ outputs:
 
 params:
   env: production
+  # 首页主列表只放正式文章；心流走 /flows/ 自己的流
+  mainSections: ["posts"]
   title: LifeOS
-  description: "记录思考，构建影响力"
-  keywords: [blog, tech, life, thinking, personal]
+  description: "先建直觉、再上公式、最后算给你看 —— 大模型对齐算法、Claude Code 内部机制与 Obsidian 学习系统的深度笔记"
+  keywords: [DPO, IPO, GRPO, RLHF, 偏好优化, 大模型对齐, Claude Code, Agent, Harness, Obsidian, 学习系统]
   author: "Ajing"
 
   # Default theme: auto (system), dark, light
@@ -69,20 +83,18 @@ params:
 
   # Homepage
   homeInfoParams:
-    Title: "你好，我是 Ajing 👋"
+    Title: "先建直觉，再上公式，最后算给你看"
     Content: |
-      欢迎来到我的个人博客。
+      我是 Ajing，做大模型训练（PPT 生成方向）。这里记录我把一个概念真正学懂的全过程——不是笔记摘抄，是从「为什么要有它」一路推到「这个数字是怎么算出来的」。
 
-      这里记录我对技术、产品和生活的思考。
+      规矩只有一条：**每个公式后面立刻跟一句「算给你看」和真实数字**。讲不清给八岁小孩听的，就是还没懂。
 
-      写作是为了更好地思考，分享是为了更好地连接。
+      下面是正在写的几个系列，每个都能从第一篇顺着读下去。
 
   # Social icons
   socialIcons:
     - name: github
-      url: "https://github.com/"
-    - name: twitter
-      url: "https://twitter.com/"
+      url: "https://github.com/cheers666-max"
     - name: rss
       url: "index.xml"
 
@@ -105,6 +117,10 @@ params:
   #   repoID: ""
   #   category: ""
   #   categoryID: ""
+
+# 心流：日期式永久链接（同日多条靠文件名区分）
+permalinks:
+  flows: /flows/:year/:month/:day/:contentbasename/
 
 # Taxonomies
 taxonomies:

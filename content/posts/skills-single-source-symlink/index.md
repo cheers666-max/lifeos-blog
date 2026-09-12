@@ -4,7 +4,7 @@ date: 2026-06-24
 description: "同时用 Claude Code / Codex / opencode / Gemini 写 skill，每个 agent 各存各的目录，互相看不见。本文记录把'多份互相镜像 + 定时同步'换成'一份真身 + 多个软链指针'的全过程：为什么定时同步是症状不是解法、合并时挖出的死链与重名暗雷、跨机器怎么用 git 而不是云盘、以及一个幂等的接入脚本。"
 summary: "别让多个目录互相追平，让它们根本就是同一个目录——单一真身 + 软链，同步问题直接消失。"
 tags: ["Claude Code", "Codex", "skills", "软链", "dotfiles", "工作流"]
-categories: ["工程"]
+categories: ["技术"]
 series: ["工程笔记"]
 ShowToc: true
 TocOpen: true

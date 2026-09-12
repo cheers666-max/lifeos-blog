@@ -4,7 +4,7 @@ date: 2025-06-15
 description: "我的第一篇博客文章，聊聊为什么开始写作"
 summary: "开始写作的契机与思考"
 tags: ["writing", "meta", "intro"]
-categories: ["思考"]
+categories: ["生活"]
 series: []
 ShowToc: true
 TocOpen: false

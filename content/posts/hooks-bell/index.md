@@ -6,6 +6,7 @@ summary: "焊死变挂载：观察者模式 × 责任链模式 → 四个 hook p
 tags: ["Claude Code", "Agent", "Harness", "Hooks", "Observer Pattern", "Chain of Responsibility", "LLM"]
 categories: ["技术"]
 series: ["Claude Code Harness 内部架构"]
+series_order: 3
 ShowToc: true
 TocOpen: true
 math: false

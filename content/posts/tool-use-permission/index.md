@@ -6,6 +6,7 @@ summary: "小狗五个房间 + 三道锁项圈：TOOL_HANDLERS 查表分发 → 
 tags: ["Claude Code", "Agent", "Harness", "Tool Use", "Permission", "Security", "LLM"]
 categories: ["技术"]
 series: ["Claude Code Harness 内部架构"]
+series_order: 2
 ShowToc: true
 TocOpen: true
 math: false

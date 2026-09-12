@@ -1,0 +1,72 @@
+{{- /* 覆盖 PaperMod 默认 home_info：在个人介绍下方自动生成「系列导航」 */ -}}
+{{- with site.Params.homeInfoParams }}
+<article class="first-entry home-info">
+    <header class="entry-header">
+        <h1>{{ .Title | markdownify }}</h1>
+    </header>
+    <div class="entry-content md-content">
+        {{ $opts := dict "display" "block" }}
+        {{ .Content | $.Page.RenderString $opts }}
+    </div>
+    <footer class="entry-footer">
+        {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
+    </footer>
+</article>
+{{- end -}}
+
+{{- /* ── 系列导航：遍历 series taxonomy，按篇数倒序，零维护 ── */ -}}
+{{- $series := site.Taxonomies.series }}
+{{- if $series }}
+<section class="home-series" aria-label="文章系列">
+  <div class="home-series-head">
+    <h2>按系列读</h2>
+    <a class="home-series-all" href="{{ "series/" | relURL }}">全部系列 →</a>
+  </div>
+  <div class="home-series-grid">
+    {{- range $series.ByCount }}
+    {{- $term := .Page }}
+    {{- $pages := .Pages }}
+    {{- /* 排序：全系列都声明了 series_order 就按它，否则退回发布日期升序 */ -}}
+    {{- $explicit := where $pages "Params.series_order" "!=" nil }}
+    {{- $reading := cond (eq (len $explicit) (len $pages)) (sort $pages "Params.series_order" "asc") (sort $pages "Date" "asc") }}
+    {{- $first := index $reading 0 }}
+    {{- $latest := index (sort $pages "Date" "desc") 0 }}
+    <article class="series-card">
+      <a class="series-card-link" href="{{ $term.RelPermalink }}" aria-label="系列 {{ $term.LinkTitle }}"></a>
+      <header class="series-card-head">
+        <h3>{{ $term.LinkTitle }}</h3>
+        <span class="series-count">{{ len $pages }} 篇</span>
+      </header>
+      <p class="series-card-start">
+        <span class="series-card-label">从这篇开始</span>
+        <a href="{{ $first.RelPermalink }}">{{ $first.Title }}</a>
+      </p>
+      <footer class="series-card-meta">
+        最近更新 {{ $latest.Date.Format "2006-01-02" }}
+      </footer>
+    </article>
+    {{- end }}
+  </div>
+</section>
+{{- end }}
+
+{{- /* ── 近期心流：最新 3 条，没有内容时整块不渲染 ── */ -}}
+{{- with site.GetPage "/flows" }}
+{{- $flows := first 3 .RegularPages.ByDate.Reverse }}
+{{- if $flows }}
+<section class="home-flows" aria-label="近期心流">
+  <div class="home-series-head">
+    <h2>近期心流</h2>
+    <a class="home-series-all" href="{{ .RelPermalink }}">全部心流 →</a>
+  </div>
+  <ul class="home-flows-list">
+    {{- range $flows }}
+    <li class="home-flow-item">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "01-02" }}</time>
+      <a href="{{ .RelPermalink }}">{{ with .Title }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 52 }}{{ end }}</a>
+    </li>
+    {{- end }}
+  </ul>
+</section>
+{{- end }}
+{{- end }}

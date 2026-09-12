@@ -6,6 +6,7 @@ summary: "一只西高地传菜小狗讲透 Agent Loop：while stop_reason == 't
 tags: ["Claude Code", "Agent", "Harness", "Agent Loop", "Tool Use", "LLM"]
 categories: ["技术"]
 series: ["Claude Code Harness 内部架构"]
+series_order: 1
 ShowToc: true
 TocOpen: true
 math: false

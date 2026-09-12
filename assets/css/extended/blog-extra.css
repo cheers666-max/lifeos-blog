@@ -462,3 +462,351 @@ figure figcaption h4 {
     border: 1px solid #ccc;
   }
 }
+
+/* ── 18. 首页系列导航 ── */
+.home-series {
+  margin: 0 0 var(--gap);
+  padding: 0;
+}
+.home-series-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1em;
+  margin-bottom: 0.9em;
+  padding-bottom: 0.5em;
+  border-bottom: 2px solid var(--border);
+}
+.home-series-head h2 {
+  font-size: 1.05em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  margin: 0;
+}
+.home-series-head h2::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 0.95em;
+  background: #F97316;
+  margin-right: 0.55em;
+  vertical-align: -0.1em;
+  border-radius: 2px;
+}
+.home-series-all {
+  font-size: 0.85em;
+  font-weight: 500;
+  color: var(--secondary);
+  white-space: nowrap;
+}
+.home-series-all:hover {
+  color: #F97316;
+}
+
+.home-series-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.series-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55em;
+  padding: 1.1em 1.2em;
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+}
+.series-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(59, 130, 246, 0.45);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+/* 整卡可点：覆盖层指向系列页，内部真实链接靠 z-index 抬到其上 */
+.series-card-link {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+}
+
+.series-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6em;
+}
+.series-card-head h3 {
+  font-size: 1.02em;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--primary);
+}
+.series-count {
+  flex: none;
+  font-size: 0.76em;
+  font-weight: 500;
+  padding: 0.15em 0.55em;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.1);
+  color: #2563EB;
+}
+
+.series-card-start {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-size: 0.9em;
+  line-height: 1.55;
+}
+.series-card-label {
+  display: block;
+  font-size: 0.78em;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #F97316;
+  margin-bottom: 0.15em;
+}
+.series-card-start a {
+  color: var(--content);
+  border-bottom: 1px solid transparent;
+}
+.series-card-start a:hover {
+  color: #2563EB;
+  border-bottom-color: currentColor;
+}
+
+.series-card-meta {
+  font-size: 0.8em;
+  color: var(--secondary);
+  margin-top: auto;
+  padding-top: 0.2em;
+}
+
+[data-theme="dark"] .series-count {
+  background: rgba(96, 165, 250, 0.14);
+  color: #93C5FD;
+}
+[data-theme="dark"] .series-card:hover {
+  border-color: rgba(96, 165, 250, 0.4);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+[data-theme="dark"] .series-card-label {
+  color: #FB923C;
+}
+[data-theme="dark"] .series-card-start a:hover {
+  color: #60A5FA;
+}
+
+@media screen and (max-width: 600px) {
+  .home-series-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── 19. 心流（flows）── */
+/* 首页「近期心流」紧凑列表 */
+.home-flows {
+  margin: 0 0 var(--gap);
+}
+.home-flows-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.home-flow-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9em;
+  padding: 0.48em 0;
+  border-bottom: 1px dashed var(--border);
+  font-size: 0.95em;
+}
+.home-flow-item:last-child {
+  border-bottom: none;
+}
+.home-flow-item time {
+  flex: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82em;
+  color: var(--secondary);
+  font-variant-numeric: tabular-nums;
+}
+.home-flow-item a {
+  color: var(--content);
+  border-bottom: 1px solid transparent;
+}
+.home-flow-item a:hover {
+  color: #2563EB;
+  border-bottom-color: currentColor;
+}
+[data-theme="dark"] .home-flow-item a:hover {
+  color: #60A5FA;
+}
+
+/* 心流列表页：左侧日期轴 + 右侧全文 */
+.flows-header {
+  margin-bottom: 2em;
+}
+.flows-stream {
+  display: flex;
+  flex-direction: column;
+  gap: 2.2em;
+}
+.flow-entry {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 1.4em;
+  padding-bottom: 2em;
+  border-bottom: 1px solid var(--border);
+}
+.flow-entry:last-child {
+  border-bottom: none;
+}
+.flow-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82em;
+  color: var(--secondary);
+  font-variant-numeric: tabular-nums;
+  padding-top: 0.35em;
+  white-space: nowrap;
+}
+.flow-title {
+  font-size: 1.22em;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  margin: 0 0 0.5em;
+}
+.flow-title a {
+  color: var(--primary);
+}
+.flow-title a:hover {
+  color: #2563EB;
+}
+[data-theme="dark"] .flow-title a:hover {
+  color: #60A5FA;
+}
+/* 心流正文比文章略小一号，标题层级也压低 */
+.flow-content {
+  font-size: 0.98em;
+}
+.flow-content > :first-child {
+  margin-top: 0;
+}
+.flow-content > :last-child {
+  margin-bottom: 0;
+}
+.flow-content h2 {
+  font-size: 1.15em;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin: 1.4em 0 0.4em;
+}
+.flow-content h2::before {
+  height: 0.85em;
+}
+.flow-meta {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  margin-top: 1em;
+  font-size: 0.82em;
+  color: var(--secondary);
+}
+.flow-permalink:hover {
+  color: #F97316;
+}
+.flow-tags {
+  display: flex;
+  gap: 0.6em;
+}
+.flow-tags a {
+  color: var(--secondary);
+}
+.flow-tags a:hover {
+  color: #2563EB;
+}
+
+/* 心流详情页 */
+.flow-single .flow-date-single {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85em;
+  color: var(--secondary);
+  margin-bottom: 0.3em;
+}
+.flow-single .post-title {
+  font-size: 1.7em;
+}
+
+@media screen and (max-width: 700px) {
+  .flow-entry {
+    grid-template-columns: 1fr;
+    gap: 0.5em;
+  }
+  .flow-date {
+    padding-top: 0;
+  }
+}
+
+.flows-empty {
+  color: var(--secondary);
+  padding: 2em 0;
+}
+
+/* ── 20. 推荐清单（links）── */
+.link-group {
+  margin-bottom: 2.4em;
+}
+.link-group .home-series-head {
+  align-items: baseline;
+}
+.link-group-desc {
+  font-size: 0.85em;
+  color: var(--secondary);
+}
+.link-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.link-item {
+  padding: 0.9em 0;
+  border-bottom: 1px dashed var(--border);
+}
+.link-item:last-child {
+  border-bottom: none;
+}
+.link-name {
+  font-size: 1.02em;
+  font-weight: 700;
+  color: var(--primary);
+  border-bottom: 1px solid transparent;
+}
+.link-name:hover {
+  color: #2563EB;
+  border-bottom-color: currentColor;
+}
+[data-theme="dark"] .link-name:hover {
+  color: #60A5FA;
+}
+.link-host {
+  margin-left: 0.7em;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75em;
+  color: var(--secondary);
+}
+.link-note {
+  margin: 0.35em 0 0;
+  font-size: 0.92em;
+  line-height: 1.65;
+  color: var(--secondary);
+}
