@@ -1,0 +1,44 @@
+{{- define "main" }}
+<header class="page-header flows-header">
+  <h1>{{ .Title }}</h1>
+  {{- with .Description }}<div class="post-description">{{ . | markdownify }}</div>{{- end }}
+</header>
+
+{{- $pages := .RegularPages.ByDate.Reverse }}
+{{- if not $pages }}
+<p class="flows-empty">还没有心流。用 <code>hugo new flows/xxx.md</code> 写第一条。</p>
+{{- else }}
+{{- $paginator := .Paginate $pages }}
+
+<div class="flows-stream">
+  {{- range $page := $paginator.Pages }}
+  <article class="flow-entry">
+    <time class="flow-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+    <div class="flow-body">
+      {{- with .Title }}<h2 class="flow-title"><a href="{{ $page.RelPermalink }}">{{ . }}</a></h2>{{- end }}
+      <div class="flow-content post-content">
+        {{ .Content }}
+      </div>
+      <footer class="flow-meta">
+        <a class="flow-permalink" href="{{ .RelPermalink }}">固定链接</a>
+        {{- with .Params.tags }}
+        <span class="flow-tags">
+          {{- range . }}<a href="{{ (printf "tags/%s/" (. | urlize)) | relURL }}">#{{ . }}</a>{{ end }}
+        </span>
+        {{- end }}
+      </footer>
+    </div>
+  </article>
+  {{- end }}
+</div>
+
+{{- if gt $paginator.TotalPages 1 }}
+<footer class="page-footer">
+  <nav class="pagination">
+    {{- if $paginator.HasPrev }}<a class="prev" href="{{ $paginator.Prev.URL | absURL }}">«&nbsp;更新的</a>{{- end }}
+    {{- if $paginator.HasNext }}<a class="next" href="{{ $paginator.Next.URL | absURL }}">更早的&nbsp;»</a>{{- end }}
+  </nav>
+</footer>
+{{- end }}
+{{- end }}{{/* end if $pages */}}
+{{- end }}

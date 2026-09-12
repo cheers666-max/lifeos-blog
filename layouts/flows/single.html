@@ -1,0 +1,22 @@
+{{- define "main" }}
+<article class="post-single flow-single">
+  <header class="post-header">
+    {{- partial "breadcrumbs.html" . }}
+    <time class="flow-date flow-date-single" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+    {{- with .Title }}<h1 class="post-title">{{ . }}</h1>{{- end }}
+  </header>
+
+  <div class="post-content">
+    {{ .Content }}
+  </div>
+
+  <footer class="post-footer">
+    {{- with .Params.tags }}
+    <ul class="post-tags">
+      {{- range . }}<li><a href="{{ (printf "tags/%s/" (. | urlize)) | relURL }}">{{ . }}</a></li>{{ end }}
+    </ul>
+    {{- end }}
+    {{- partial "post_nav_links.html" . }}
+  </footer>
+</article>
+{{- end }}
