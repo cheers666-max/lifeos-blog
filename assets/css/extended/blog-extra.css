@@ -941,3 +941,29 @@ figure figcaption h4 {
     display: none;
   }
 }
+
+/* ══════════════════════════════════════════════════════════
+   22. 草稿纸底纹
+   图是手绘在纸上的，正文的规矩是「算给你看」——
+   底色就用演算草稿纸。只铺在首页和列表页，文章正文保持干净。
+   ══════════════════════════════════════════════════════════ */
+body:has(.page-shell) {
+  background-image: radial-gradient(circle, rgba(17, 24, 39, 0.045) 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-position: -1px -1px;
+}
+
+/* 内容块是白的，等于把纸片压在草稿纸上 */
+body:has(.page-shell) .lead-figure,
+body:has(.page-shell) .row-thumb {
+  box-shadow: 0 1px 3px rgba(17, 24, 39, 0.06);
+}
+
+[data-theme="dark"] body:has(.page-shell),
+body:has(.page-shell) {
+  background-color: var(--theme);
+}
+[data-theme="dark"] body:has(.page-shell) {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
