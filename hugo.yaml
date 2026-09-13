@@ -60,6 +60,8 @@ params:
   env: production
   # 首页主列表只放正式文章；心流走 /flows/ 自己的流
   mainSections: ["posts"]
+  # 首页主卡展示哪个系列（留空则自动取最近更新的那个）
+  featuredSeries: "Claude Code Harness 内部架构"
   title: LifeOS
   description: "先建直觉、再上公式、最后算给你看 —— 大模型对齐算法、Claude Code 内部机制与 Obsidian 学习系统的深度笔记"
   keywords: [DPO, IPO, GRPO, RLHF, 偏好优化, 大模型对齐, Claude Code, Agent, Harness, Obsidian, 学习系统]

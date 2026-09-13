@@ -1,4 +1,5 @@
 {{- define "main" }}
+<div class="page-shell">
 <header class="page-header">
   <h1>{{ .Title }}</h1>
   {{- with .Description }}<div class="post-description">{{ . | markdownify }}</div>{{- end }}
@@ -11,10 +12,8 @@
 {{- range $groups }}
 {{- if .items }}
 <section class="link-group">
-  <div class="home-series-head">
-    <h2>{{ .group }}</h2>
-    {{- with .desc }}<span class="link-group-desc">{{ . }}</span>{{- end }}
-  </div>
+  <h2 class="block-title">{{ .group }}</h2>
+  {{- with .desc }}<p class="link-group-desc">{{ . }}</p>{{- end }}
   <ul class="link-list">
     {{- range .items }}
     <li class="link-item">
@@ -34,7 +33,7 @@
 {{- /* 板块里如果还有正经文章（长评），列在下面 */ -}}
 {{- with .RegularPages }}
 <section class="link-group">
-  <div class="home-series-head"><h2>深度点评</h2></div>
+  <h2 class="block-title">深度点评</h2>
   <ul class="link-list">
     {{- range . }}
     <li class="link-item">
@@ -45,4 +44,5 @@
   </ul>
 </section>
 {{- end }}
+</div>
 {{- end }}

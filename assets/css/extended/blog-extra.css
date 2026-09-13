@@ -238,6 +238,11 @@ figure figcaption h4 {
 .article-with-toc.has-toc .post-single {
   max-width: clamp(650px, 54vw, 900px);
 }
+/* 没有侧栏目录的页面多是纯文字，收到易读的中文行长（约 36 字） */
+.article-with-toc:not(.has-toc) .post-single {
+  max-width: 820px;
+  margin: 0 auto;
+}
 
 /* 超宽屏进一步放宽 */
 @media screen and (min-width: 1600px) {
@@ -467,159 +472,8 @@ figure figcaption h4 {
   }
 }
 
-/* ── 18. 首页系列导航 ── */
-.home-series {
-  margin: 0 0 var(--gap);
-  padding: 0;
-}
-.home-series-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1em;
-  margin-bottom: 0.9em;
-  padding-bottom: 0.5em;
-  border-bottom: 2px solid var(--border);
-}
-.home-series-head h2 {
-  font-size: 1.05em;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--secondary);
-  margin: 0;
-}
-.home-series-head h2::before {
-  content: "";
-  display: inline-block;
-  width: 4px;
-  height: 0.95em;
-  background: #F97316;
-  margin-right: 0.55em;
-  vertical-align: -0.1em;
-  border-radius: 2px;
-}
-.home-series-all {
-  font-size: 0.85em;
-  font-weight: 500;
-  color: var(--secondary);
-  white-space: nowrap;
-}
-.home-series-all:hover {
-  color: #F97316;
-}
-
-.home-series-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 14px;
-}
-
-.series-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 0.55em;
-  padding: 1.1em 1.2em;
-  background: var(--entry);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
-}
-.series-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(59, 130, 246, 0.45);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-}
-/* 整卡可点：覆盖层指向系列页，内部真实链接靠 z-index 抬到其上 */
-.series-card-link {
-  position: absolute;
-  inset: 0;
-  border-radius: var(--radius);
-}
-
-.series-card-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.6em;
-}
-.series-card-head h3 {
-  font-size: 1.02em;
-  font-weight: 700;
-  line-height: 1.35;
-  letter-spacing: -0.01em;
-  margin: 0;
-  color: var(--primary);
-}
-.series-count {
-  flex: none;
-  font-size: 0.76em;
-  font-weight: 500;
-  padding: 0.15em 0.55em;
-  border-radius: 999px;
-  background: rgba(59, 130, 246, 0.1);
-  color: #2563EB;
-}
-
-.series-card-start {
-  position: relative;
-  z-index: 1;
-  margin: 0;
-  font-size: 0.9em;
-  line-height: 1.55;
-}
-.series-card-label {
-  display: block;
-  font-size: 0.78em;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #F97316;
-  margin-bottom: 0.15em;
-}
-.series-card-start a {
-  color: var(--content);
-  border-bottom: 1px solid transparent;
-}
-.series-card-start a:hover {
-  color: #2563EB;
-  border-bottom-color: currentColor;
-}
-
-.series-card-meta {
-  font-size: 0.8em;
-  color: var(--secondary);
-  margin-top: auto;
-  padding-top: 0.2em;
-}
-
-[data-theme="dark"] .series-count {
-  background: rgba(96, 165, 250, 0.14);
-  color: #93C5FD;
-}
-[data-theme="dark"] .series-card:hover {
-  border-color: rgba(96, 165, 250, 0.4);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-}
-[data-theme="dark"] .series-card-label {
-  color: #FB923C;
-}
-[data-theme="dark"] .series-card-start a:hover {
-  color: #60A5FA;
-}
-
-@media screen and (max-width: 600px) {
-  .home-series-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* ── 19. 心流（flows）── */
 /* 首页「近期心流」紧凑列表 */
-.home-flows {
-  margin: 0 0 var(--gap);
-}
 .home-flows-list {
   list-style: none;
   margin: 0;
@@ -628,28 +482,24 @@ figure figcaption h4 {
 .home-flow-item {
   display: flex;
   align-items: baseline;
-  gap: 0.9em;
-  padding: 0.48em 0;
-  border-bottom: 1px dashed var(--border);
-  font-size: 0.95em;
+  gap: 1.1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
 }
 .home-flow-item:last-child {
   border-bottom: none;
 }
 .home-flow-item time {
   flex: none;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.82em;
+  width: 5.5em;
+  font-size: 0.88rem;
   color: var(--secondary);
-  font-variant-numeric: tabular-nums;
 }
 .home-flow-item a {
   color: var(--content);
-  border-bottom: 1px solid transparent;
 }
 .home-flow-item a:hover {
   color: #2563EB;
-  border-bottom-color: currentColor;
 }
 [data-theme="dark"] .home-flow-item a:hover {
   color: #60A5FA;
@@ -770,9 +620,6 @@ figure figcaption h4 {
 .link-group {
   margin-bottom: 2.4em;
 }
-.link-group .home-series-head {
-  align-items: baseline;
-}
 .link-group-desc {
   font-size: 0.85em;
   color: var(--secondary);
@@ -813,4 +660,284 @@ figure figcaption h4 {
   font-size: 0.92em;
   line-height: 1.65;
   color: var(--secondary);
+}
+
+/* ══════════════════════════════════════════════════════════
+   21. 首页 — 杂志式层次
+   手绘图是主角；一张大卡做唯一视觉焦点，其余全部安静。
+   ══════════════════════════════════════════════════════════ */
+
+/* 首页单独收窄栏宽：列表不需要文章页那么宽，行长过长会失去版面感 */
+.page-shell {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+/* ── Hero ── */
+.hero {
+  padding: 1rem 0 3rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--border);
+}
+.hero-title {
+  font-size: clamp(1.85rem, 3.6vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+  margin: 0 0 1.3rem;
+}
+.hero-body {
+  max-width: 34em;
+  font-size: 1.02rem;
+  line-height: 1.85;
+  color: var(--secondary);
+}
+.hero-body p {
+  margin: 0 0 0.85em;
+}
+.hero-body p:last-child {
+  margin-bottom: 0;
+}
+.hero-body strong {
+  color: var(--content);
+  font-weight: 600;
+}
+.hero-links {
+  margin-top: 1.6rem;
+}
+.hero-links .social-icons {
+  padding: 0;
+}
+
+/* ── 区块标题：正常中文字号，不做成小号全大写标签 ── */
+.block-title {
+  font-size: 1.22rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin: 0 0 1.5rem;
+}
+
+.series-block,
+.flows-block,
+.posts-block {
+  margin-bottom: 3.4rem;
+}
+
+/* ── 主系列：唯一的视觉焦点 ── */
+.lead-series {
+  display: grid;
+  gap: 2.2rem;
+  align-items: center;
+  margin-bottom: 1.8rem;
+}
+.lead-series.has-figure {
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+}
+/* 手绘图是白底线稿，给一块干净底色让它浮起来 */
+.lead-figure {
+  background: #fff;
+  border: 1px solid var(--border);
+  padding: 1.1rem;
+}
+.lead-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.lead-name {
+  font-size: clamp(1.4rem, 2.4vw, 1.85rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
+}
+.lead-name a {
+  color: var(--primary);
+}
+.lead-count {
+  font-size: 0.88rem;
+  color: var(--secondary);
+  margin: 0 0 1.1rem;
+}
+.lead-entry {
+  font-size: 1.02rem;
+  line-height: 1.6;
+  margin: 0 0 0.7rem;
+}
+/* 橙色整页只花在这一处：读者最该点的那个入口 */
+.lead-entry a {
+  color: var(--content);
+  font-weight: 600;
+  box-shadow: inset 0 -0.55em 0 rgba(249, 115, 22, 0.22);
+}
+.lead-entry a:hover {
+  box-shadow: inset 0 -1.15em 0 rgba(249, 115, 22, 0.28);
+}
+.lead-summary {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--secondary);
+  margin: 0;
+}
+
+/* ── 其余系列：安静的一行一个 ── */
+.series-rest {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--border);
+}
+.series-rest li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.rest-name {
+  font-weight: 600;
+  color: var(--primary);
+}
+.rest-name:hover {
+  color: #2563EB;
+}
+.rest-count {
+  font-size: 0.85rem;
+  color: var(--secondary);
+}
+.rest-entry {
+  font-size: 0.9rem;
+  color: var(--secondary);
+}
+.rest-entry a {
+  color: var(--secondary);
+  border-bottom: 1px solid var(--border);
+}
+.rest-entry a:hover {
+  color: #2563EB;
+}
+
+/* ── 文章列表：缩略图让手绘图在首页露脸 ── */
+.post-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.post-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr);
+  gap: 1.4rem;
+  align-items: center;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.post-row:first-child {
+  border-top: 1px solid var(--border);
+}
+.row-hit {
+  position: absolute;
+  inset: 0;
+}
+.row-thumb {
+  background: #fff;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.row-thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.row-title {
+  font-size: 1.06rem;
+  font-weight: 600;
+  line-height: 1.45;
+  margin: 0 0 0.35rem;
+  color: var(--primary);
+}
+.post-row:hover .row-title {
+  color: #2563EB;
+}
+[data-theme="dark"] .post-row:hover .row-title {
+  color: #60A5FA;
+}
+.row-summary {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--secondary);
+  margin: 0 0 0.4rem;
+}
+.row-meta {
+  font-size: 0.82rem;
+  color: var(--secondary);
+  margin: 0;
+}
+.row-series {
+  margin-left: 0.8em;
+  padding-left: 0.8em;
+  border-left: 1px solid var(--border);
+}
+
+/* 没有配图时保留同样的位置，列表左边缘才不会参差 */
+.row-thumb.is-empty {
+  aspect-ratio: 320 / 220;
+  background: var(--code-bg);
+  border-color: transparent;
+  opacity: 0.55;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  font-size: 0.92rem;
+}
+.pagination a,
+.page-shell .pagination a.prev,
+.page-shell .pagination a.next {
+  background: none;
+  color: var(--secondary);
+  padding: 0;
+  border-radius: 0;
+  border-bottom: 1px solid var(--border);
+}
+.pagination a:hover {
+  color: #2563EB;
+}
+.pagination .next {
+  margin-left: auto;
+}
+
+/* 暗色下白底线稿会刺眼，垫一层略暖的浅色 */
+[data-theme="dark"] .lead-figure,
+[data-theme="dark"] .row-thumb {
+  background: #E8E6E1;
+  border-color: transparent;
+}
+/* 空占位没有图，跟着变亮会成为一块突兀的色块 */
+[data-theme="dark"] .row-thumb.is-empty {
+  background: rgba(255, 255, 255, 0.05);
+}
+/* 深色底上橙色需要更实一点才看得出是高亮 */
+[data-theme="dark"] .lead-entry a {
+  box-shadow: inset 0 -0.55em 0 rgba(249, 115, 22, 0.32);
+}
+[data-theme="dark"] .lead-entry a:hover {
+  box-shadow: inset 0 -1.15em 0 rgba(249, 115, 22, 0.38);
+}
+
+@media screen and (max-width: 760px) {
+  .lead-series.has-figure {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.4rem;
+  }
+  .post-row {
+    grid-template-columns: 92px minmax(0, 1fr);
+    gap: 1rem;
+  }
+  .row-summary {
+    display: none;
+  }
 }

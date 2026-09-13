@@ -1,0 +1,141 @@
+{{- define "main" }}
+<div class="page-shell">
+
+{{- /* ── Hero ── */ -}}
+{{- with site.Params.homeInfoParams }}
+<section class="hero">
+  <h1 class="hero-title">{{ .Title | markdownify }}</h1>
+  <div class="hero-body">
+    {{ .Content | $.Page.RenderString (dict "display" "block") }}
+  </div>
+  <div class="hero-links">{{ partial "social_icons.html" . }}</div>
+</section>
+{{- end }}
+
+{{- /* ── 正在写：最近更新的系列做主卡，其余列在下面 ── */ -}}
+{{- $series := site.Taxonomies.series }}
+{{- if $series }}
+  {{- /* 按最近更新排序 */ -}}
+  {{- $ranked := slice }}
+  {{- range $series }}
+    {{- $pages := .Pages }}
+    {{- $explicit := where $pages "Params.series_order" "!=" nil }}
+    {{- $reading := cond (eq (len $explicit) (len $pages)) (sort $pages "Params.series_order" "asc") (sort $pages "Date" "asc") }}
+    {{- $latest := index (sort $pages "Date" "desc") 0 }}
+    {{- $ranked = $ranked | append (dict "term" .Page "pages" $pages "first" (index $reading 0) "latest" $latest) }}
+  {{- end }}
+  {{- $ranked = sort $ranked "latest.Date" "desc" }}
+  {{- /* 主卡系列：hugo.yaml 的 featuredSeries 指定，未指定则取最近更新的 */ -}}
+  {{- $lead := index $ranked 0 }}
+  {{- with site.Params.featuredSeries }}
+    {{- $picked := where $ranked "term.LinkTitle" . }}
+    {{- with $picked }}{{ $lead = index . 0 }}{{ end }}
+  {{- end }}
+  {{- $rest := where $ranked "term.LinkTitle" "!=" $lead.term.LinkTitle }}
+
+<section class="series-block">
+  <h2 class="block-title">正在写</h2>
+
+  {{- with $lead }}
+    {{- /* 主卡配图：取该系列里第一张能找到的封面 */ -}}
+    {{- $cover := "" }}
+    {{- $alt := "" }}
+    {{- range .pages }}
+      {{- if and (not $cover) .Params.cover.image }}
+        {{- with (.Resources.ByType "image").GetMatch (printf "*%s*" .Params.cover.image) }}
+          {{- $cover = . }}
+        {{- end }}
+        {{- $alt = .Params.cover.alt | default .Title }}
+      {{- end }}
+    {{- end }}
+  <article class="lead-series{{ if $cover }} has-figure{{ end }}">
+    {{- with $cover }}
+    <div class="lead-figure">
+      <img src="{{ (.Fit "900x620").Permalink }}" alt="{{ $alt }}" loading="eager" width="{{ (.Fit "900x620").Width }}" height="{{ (.Fit "900x620").Height }}">
+    </div>
+    {{- end }}
+    <div class="lead-text">
+      <h3 class="lead-name"><a href="{{ .term.RelPermalink }}">{{ .term.LinkTitle }}</a></h3>
+      <p class="lead-count">{{ len .pages }} 篇，最近更新 {{ .latest.Date.Format "2006 年 1 月 2 日" }}</p>
+      <p class="lead-entry">
+        从<a href="{{ .first.RelPermalink }}">《{{ .first.Title }}》</a>开始读
+      </p>
+      {{- with .first.Params.summary }}<p class="lead-summary">{{ . }}</p>{{ end }}
+    </div>
+  </article>
+  {{- end }}
+
+  {{- if $rest }}
+  <ul class="series-rest">
+    {{- range $rest }}
+    <li>
+      <a class="rest-name" href="{{ .term.RelPermalink }}">{{ .term.LinkTitle }}</a>
+      <span class="rest-count">{{ len .pages }} 篇</span>
+      <span class="rest-entry">从<a href="{{ .first.RelPermalink }}">《{{ .first.Title }}》</a>开始</span>
+    </li>
+    {{- end }}
+  </ul>
+  {{- end }}
+</section>
+{{- end }}
+
+{{- /* ── 近期心流 ── */ -}}
+{{- with site.GetPage "/flows" }}
+{{- $flows := first 3 .RegularPages.ByDate.Reverse }}
+{{- if $flows }}
+<section class="flows-block">
+  <h2 class="block-title">近期心流</h2>
+  <ul class="home-flows-list">
+    {{- range $flows }}
+    <li class="home-flow-item">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "1 月 2 日" }}</time>
+      <a href="{{ .RelPermalink }}">{{ with .Title }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 52 }}{{ end }}</a>
+    </li>
+    {{- end }}
+  </ul>
+</section>
+{{- end }}
+{{- end }}
+
+{{- /* ── 文章列表：带缩略图 ── */ -}}
+{{- $posts := where site.RegularPages "Type" "in" site.Params.mainSections }}
+{{- $paginator := .Paginate $posts }}
+<section class="posts-block">
+  <h2 class="block-title">最新文章</h2>
+  <ul class="post-rows">
+    {{- range $paginator.Pages }}
+    {{- $thumb := "" }}
+    {{- if .Params.cover.image }}
+      {{- with (.Resources.ByType "image").GetMatch (printf "*%s*" .Params.cover.image) }}
+        {{- $thumb = . }}
+      {{- end }}
+    {{- end }}
+    <li class="post-row">
+      <a class="row-hit" href="{{ .RelPermalink }}" aria-label="{{ .Title | plainify }}"></a>
+      <div class="row-thumb{{ if not $thumb }} is-empty{{ end }}">
+        {{- with $thumb }}
+        <img src="{{ (.Fill "320x220 Center").Permalink }}" alt="" loading="lazy" width="320" height="220">
+        {{- end }}
+      </div>
+      <div class="row-text">
+        <h3 class="row-title">{{ .Title }}</h3>
+        <p class="row-summary">{{ .Summary | plainify | htmlUnescape | truncate 96 }}</p>
+        <p class="row-meta">
+          {{ .Date.Format "2006-01-02" }}
+          {{- with .Params.series }}<span class="row-series">{{ index . 0 }}</span>{{ end }}
+        </p>
+      </div>
+    </li>
+    {{- end }}
+  </ul>
+
+  {{- if gt $paginator.TotalPages 1 }}
+  <nav class="pagination">
+    {{- if $paginator.HasPrev }}<a class="prev" href="{{ $paginator.Prev.URL | absURL }}">更新的</a>{{ end }}
+    {{- if $paginator.HasNext }}<a class="next" href="{{ $paginator.Next.URL | absURL }}">更早的文章</a>{{ end }}
+  </nav>
+  {{- end }}
+</section>
+
+</div>
+{{- end }}

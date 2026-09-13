@@ -1,4 +1,5 @@
 {{- define "main" }}
+<div class="page-shell">
 <header class="page-header flows-header">
   <h1>{{ .Title }}</h1>
   {{- with .Description }}<div class="post-description">{{ . | markdownify }}</div>{{- end }}
@@ -41,4 +42,5 @@
 </footer>
 {{- end }}
 {{- end }}{{/* end if $pages */}}
+</div>
 {{- end }}
