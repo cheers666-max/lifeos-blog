@@ -135,8 +135,8 @@ blockquote strong {
   text-align: left;
   font-weight: 700;
   font-size: 0.85em;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  /* 不做 uppercase：表头里有数学符号时，x 和 X 是两个不同的量 */
+  letter-spacing: 0.02em;
   color: var(--secondary);
   border-bottom: 2px solid var(--border);
 }
