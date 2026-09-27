@@ -24,12 +24,10 @@ python3 scripts/check-portal.py /tmp/lifeos-build
 历史 publish.sh 和 deploy/ 为旧服务器部署方式，当前 GitHub Pages 发布不调用它们。
 
 
-## 数字生活：频道归档精选
+## 数字生活：嵌入已有资源分享社
 
-`/explore/digital/` 展示 `share.cokelink.com` 中的编辑精选；原入门手册仍位于 `/guides/digital-life/`。
+`/explore/digital/` 通过 iframe 直接嵌入 `https://share.cokelink.com/`，复用原项目的界面、搜索、归档与内容维护。LifeOS 不再存储、选编或复制归档条目；`data/digital.json` 仅保留原站、频道地址和站内实践文章入口。
 
-- 内容入口：`data/digital.json` 的 `archive.items`，保留归档 ID、原始标题、收录日期、详情地址和 Telegram 原帖地址。展示标题与摘要经过精简。
-- 本页为人工选编的静态快照，不会自动跟随频道更新，也不改动归档站的精选标记。当前选编日期见 `archive.selected_at`。
-- 新增内容时先核对公开接口 `/api/messages/:id`，再补充条目；列表首项是主推荐。
-- 封面为本站文字设计。2026-09-27 检查时，归档返回的 TeamAI 图片地址为 404，因此页面不依赖归档媒体。
-- 归档仍是完整内容的来源；网站仅提供摘要和跳转入口。无需读取 D1、R2 或 Telegram 凭据。
+原入门手册仍位于 `/guides/digital-life/`。嵌入区提供新窗口打开入口，方便独立浏览或在嵌入加载失败时使用。
+
+2026-09-27 检查：原站返回 HTTP 200，无 X-Frame-Options 或 CSP frame-ancestors 限制。若原站后续添加嵌入限制，应在原项目中明确允许 LifeOS 的来源。原站主题和内部导航由原项目管理。

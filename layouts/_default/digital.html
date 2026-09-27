@@ -2,28 +2,13 @@
 {{ $archive := site.Data.digital.archive }}
 <div class="os-home os-digital">
   <header class="os-digital-intro">
-    <div><p class="os-eyebrow">THE DIGITAL LIFE EDIT</p><h1>{{ .Title }}<span>值得慢慢探索。</span></h1><p>{{ .Description }}</p></div>
-    <a class="os-digital-stamp" href="{{ $archive.url }}"><span>MY DIGITAL SHELF</span><strong>AI Native</strong><span>频道里的发现 · 网页里的收藏 ↗</span></a>
+    <div><p class="os-eyebrow">DIGITAL LIFE</p><h1>{{ .Title }}</h1><p>{{ .Description }}</p></div>
+    <a class="os-text-link" href="{{ (site.GetPage "/guides/digital-life").RelPermalink }}">数字生活手册 ↗</a>
   </header>
-  <nav class="os-digital-nav" aria-label="数字生活页内导航"><a href="#curated">归档精选 ↓</a><a href="#reading">实践笔记 ↓</a><a href="#practice">工具与手册 ↓</a><a href="{{ $archive.url }}">浏览完整归档 ↗</a></nav>
-  <section class="os-section" id="curated" aria-labelledby="curated-title">
-    <div class="os-section-head"><div><p class="os-eyebrow">COLLECTED WITH CURIOSITY</p><h2 id="curated-title">从收藏里，挑一些值得看的。</h2></div><span class="os-digital-count">本页精选 · {{ len $archive.items }} 篇</span></div>
-    <p class="os-digital-description">选自 AI Native 资源分享社的频道归档。工具、课程、书籍，以及让日常多一点可能的方法。</p>
-    {{ with index $archive.items 0 }}
-    <article class="os-digital-lead">
-      <a class="os-digital-lead-cover" href="{{ .url }}" aria-label="阅读归档：{{ .title }}"><div class="os-digital-art" aria-hidden="true"><span>KNOWLEDGE, SHARED.</span><strong>TeamAI<span>CLI</span></strong><div class="os-digital-art-pills"><span>Skills</span><span>Rules</span><span>Hooks</span><span>MCP</span></div><small>让经验成为可以复用的共同语言。</small></div></a>
-      <div class="os-digital-lead-copy"><p class="os-eyebrow">EDITOR’S PICK / 01 · {{ .category }}</p><h3><a href="{{ .url }}">{{ .title }}</a></h3><p>{{ .summary }}</p><div class="os-digital-note">{{ .note }}</div><div class="os-digital-card-links"><a class="os-button" href="{{ .url }}">阅读归档 ↗</a><a href="{{ .telegram }}">Telegram 原帖 ↗</a></div><time datetime="{{ .date }}">收录于 {{ .date }}</time></div>
-    </article>
-    {{ end }}
-    <div class="os-digital-grid">
-      {{ range after 1 $archive.items }}
-      <article class="os-digital-card">
-        <a class="os-digital-cover os-digital-cover-type" href="{{ .url }}" aria-label="阅读归档：{{ .title }}"><span aria-hidden="true"><small>{{ .category }} / FROM THE ARCHIVE</small><strong>{{ .art }}</strong><em>{{ .caption }}</em></span></a>
-        <div class="os-digital-card-body"><div class="os-digital-card-meta"><span>{{ .category }}</span><time datetime="{{ .date }}">{{ .date }}</time></div><h3><a href="{{ .url }}">{{ .title }}</a></h3><p>{{ .summary }}</p><div class="os-digital-card-links"><a href="{{ .url }}">阅读归档 ↗</a><a href="{{ .telegram }}">Telegram 原帖 ↗</a></div></div>
-      </article>
-      {{ end }}
-    </div>
-    <aside class="os-digital-channel"><div><span class="os-eyebrow">ONE COLLECTION, TWO WAYS TO READ</span><h3>在频道里发现，在归档里重逢。</h3><p>去归档站搜索和回看，或在 Telegram 继续关注新的分享。</p></div><div class="os-digital-channel-actions"><a class="os-button" href="{{ $archive.url }}">打开完整归档 ↗</a><a href="{{ $archive.channel }}">关注 Telegram 频道 ↗</a></div></aside>
+  <section class="os-archive-panel" aria-labelledby="archive-title">
+    <div class="os-archive-toolbar"><div><h2 id="archive-title">AI Native 资源分享社</h2><p>频道里的分享，都在这里。</p></div><div class="os-archive-actions"><a href="{{ $archive.channel }}" target="_blank" rel="noopener noreferrer">Telegram 频道 ↗</a><a href="{{ $archive.url }}" target="_blank" rel="noopener noreferrer">在新窗口打开 ↗</a></div></div>
+    <iframe class="os-archive-frame" src="{{ $archive.url }}/" title="AI Native 资源分享社：搜索与浏览 Telegram 频道归档" referrerpolicy="strict-origin-when-cross-origin" allow="fullscreen" allowfullscreen></iframe>
+    <p class="os-archive-help">如果内容未显示，<a href="{{ $archive.url }}" target="_blank" rel="noopener noreferrer">直接打开资源分享社 ↗</a></p>
   </section>
   <section class="os-section" id="reading" aria-labelledby="reading-title">
     <div class="os-section-head"><div><p class="os-eyebrow">FROM MY NOTEBOOK</p><h2 id="reading-title">把发现用起来</h2></div><a href="{{ "archives/" | relURL }}">全部文章 ↗</a></div>

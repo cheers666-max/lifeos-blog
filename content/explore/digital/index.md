@@ -1,7 +1,7 @@
 ---
 title: 数字生活
-description: 把值得留下的发现，变成生活里的灵感与方法。
-summary: 来自 AI Native 频道归档的开源工具、课程与学习资源，以及数字生活实践。
+description: 浏览频道里的工具、教程与资源，也记录自己的数字生活实践。
+summary: AI Native 资源分享社的完整频道归档，以及数字生活实践与手册。
 layout: digital
 hideMeta: true
 ShowPostNavLinks: false
