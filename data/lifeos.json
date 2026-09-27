@@ -1,0 +1,71 @@
+{
+  "domains": [
+    {
+      "slug": "system",
+      "number": "01",
+      "title": "人生系统",
+      "headline": "让目标成为日常行动",
+      "description": "从身份与目标，到项目、行动和复盘，逐步搭建自己的运行方式。",
+      "posts": [
+        "identities-cover-each-other"
+      ]
+    },
+    {
+      "slug": "learning",
+      "number": "02",
+      "title": "学习与知识",
+      "headline": "把看过，变成真正学会",
+      "description": "用 AI 诊断、练习和反馈，用 Obsidian 留下可复用的知识。",
+      "posts": [
+        "obsidian-ai-learning-system",
+        "obsidian-learning-os-setup",
+        "learning-os-handbook",
+        "learning-os-architecture",
+        "obsidian-learning-os-multi-device"
+      ]
+    },
+    {
+      "slug": "engineering",
+      "number": "03",
+      "title": "AI 与工程",
+      "headline": "读源码，也把它讲明白",
+      "description": "先建直觉，再上公式，最后用数字与代码验证。",
+      "posts": [
+        "agent-loop-harness",
+        "tool-use-permission",
+        "hooks-bell",
+        "dpo-preference-optimization",
+        "ipo-identity-preference-optimization",
+        "grpo-group-relative-policy-optimization",
+        "hated-algorithms-01-neuron",
+        "skills-single-source-symlink"
+      ]
+    },
+    {
+      "slug": "digital",
+      "number": "04",
+      "title": "效率与数字生活",
+      "headline": "让工具配合你的节奏",
+      "description": "从一次专注开始，整理快捷指令、设备入口与跨设备协作。",
+      "posts": []
+    },
+    {
+      "slug": "experiments",
+      "number": "05",
+      "title": "生活实验",
+      "headline": "在真实生活里检验方法",
+      "description": "记录身份、习惯与执行中的发现，让观察变成下一次调整。",
+      "posts": [
+        "identities-cover-each-other"
+      ]
+    },
+    {
+      "slug": "projects",
+      "number": "06",
+      "title": "项目与作品",
+      "headline": "把方法做成能用的东西",
+      "description": "查看系统实践、使用手册与工具的当前进展。",
+      "posts": []
+    }
+  ]
+}

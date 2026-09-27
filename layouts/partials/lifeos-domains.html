@@ -1,0 +1,1 @@
+<div class="os-domains">{{ range site.Data.lifeos.domains }}{{ $p := site.GetPage (printf "/explore/%s" .slug) }}<a class="os-domain" href="{{ $p.RelPermalink }}"><span class="os-number">{{ .number }} ↗</span><h3>{{ .title }}</h3><p>{{ .description }}</p><span class="os-card-link">进入领域 →</span></a>{{ end }}</div>

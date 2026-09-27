@@ -1,4 +1,4 @@
-baseURL: "http://35.208.201.12/"
+baseURL: "https://cheers666-max.github.io/lifeos-blog/"
 locale: "zh-cn"
 title: "LifeOS"
 theme: "PaperMod"
@@ -20,34 +20,12 @@ minify:
 # Menu
 menu:
   main:
-    - identifier: flows
-      name: 心流
-      url: /flows/
-      weight: 1
-    - identifier: links
-      name: 推荐
-      url: /links/
-      weight: 6
-    - identifier: series
-      name: 系列
-      url: /series/
-      weight: 5
-    - identifier: archives
-      name: 归档
-      url: /archives/
-      weight: 10
-    - identifier: search
-      name: 搜索
-      url: /search/
-      weight: 20
-    - identifier: tags
-      name: 标签
-      url: /tags/
-      weight: 30
-    - identifier: about
-      name: 关于
-      url: /about/
-      weight: 40
+    - {identifier: explore, name: 探索, url: /explore/, weight: 10}
+    - {identifier: series, name: 专题, url: /series/, weight: 20}
+    - {identifier: guides, name: 数字生活, url: /guides/digital-life/, weight: 30}
+    - {identifier: projects, name: 项目, url: /explore/projects/, weight: 40}
+    - {identifier: search, name: 搜索, url: /search/, weight: 50}
+    - {identifier: about, name: 关于, url: /about/, weight: 60}
 
 # Output formats
 outputs:
