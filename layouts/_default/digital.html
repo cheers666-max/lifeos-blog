@@ -1,30 +1,39 @@
 {{ define "main" }}
+{{ $archive := site.Data.digital.archive }}
 <div class="os-home os-digital">
   <header class="os-digital-intro">
-    <p class="os-eyebrow">DIGITAL LIFE / CURATED & PRACTICED</p>
-    <h1>{{ .Title }}</h1>
-    <p>{{ .Description }}</p>
-    <nav class="os-digital-nav" aria-label="数字生活页内导航">
-      <a href="#curated">关注精选 ↓</a><a href="#reading">精选阅读 ↓</a><a href="#practice">工具与实践 ↓</a>
-    </nav>
+    <div><p class="os-eyebrow">THE DIGITAL LIFE EDIT</p><h1>{{ .Title }}<span>值得慢慢探索。</span></h1><p>{{ .Description }}</p></div>
+    <a class="os-digital-stamp" href="{{ $archive.url }}"><span>MY DIGITAL SHELF</span><strong>AI Native</strong><span>频道里的发现 · 网页里的收藏 ↗</span></a>
   </header>
+  <nav class="os-digital-nav" aria-label="数字生活页内导航"><a href="#curated">归档精选 ↓</a><a href="#reading">实践笔记 ↓</a><a href="#practice">工具与手册 ↓</a><a href="{{ $archive.url }}">浏览完整归档 ↗</a></nav>
   <section class="os-section" id="curated" aria-labelledby="curated-title">
-    <div class="os-section-head"><div><p class="os-eyebrow">ON MY RADAR</p><h2 id="curated-title">关注精选</h2></div></div>
-    <p class="os-digital-description">围绕 AI、Web3、创业与成长，收集值得进一步阅读和尝试的内容。</p>
-    <div class="os-digital-directions">{{ range site.Data.digital.directions }}<div><h3>{{ .title }}</h3><p>{{ .description }}</p></div>{{ end }}</div>
-    <aside class="os-digital-channel"><div><span class="os-eyebrow">TELEGRAM · @ainative_share</span><h3>在频道里，继续发现</h3><p>查看频道中的信息速览、摘要与原文链接。</p></div><a class="os-button" href="https://t.me/ainative_share">打开精选频道 ↗</a></aside>
-    <div class="os-section-head os-digital-subhead"><h3>数字生活信息源</h3><span>来自已有订阅</span></div>
-    <div class="os-routes">{{ range site.Data.digital.sources }}<a class="os-route" href="{{ .url }}"><h3>{{ .title }} ↗</h3><p>{{ .note }}</p><small>Telegram · 查看来源</small></a>{{ end }}</div>
+    <div class="os-section-head"><div><p class="os-eyebrow">COLLECTED WITH CURIOSITY</p><h2 id="curated-title">从收藏里，挑一些值得看的。</h2></div><span class="os-digital-count">本页精选 · {{ len $archive.items }} 篇</span></div>
+    <p class="os-digital-description">选自 AI Native 资源分享社的频道归档。工具、课程、书籍，以及让日常多一点可能的方法。</p>
+    {{ with index $archive.items 0 }}
+    <article class="os-digital-lead">
+      <a class="os-digital-lead-cover" href="{{ .url }}" aria-label="阅读归档：{{ .title }}"><div class="os-digital-art" aria-hidden="true"><span>KNOWLEDGE, SHARED.</span><strong>TeamAI<span>CLI</span></strong><div class="os-digital-art-pills"><span>Skills</span><span>Rules</span><span>Hooks</span><span>MCP</span></div><small>让经验成为可以复用的共同语言。</small></div></a>
+      <div class="os-digital-lead-copy"><p class="os-eyebrow">EDITOR’S PICK / 01 · {{ .category }}</p><h3><a href="{{ .url }}">{{ .title }}</a></h3><p>{{ .summary }}</p><div class="os-digital-note">{{ .note }}</div><div class="os-digital-card-links"><a class="os-button" href="{{ .url }}">阅读归档 ↗</a><a href="{{ .telegram }}">Telegram 原帖 ↗</a></div><time datetime="{{ .date }}">收录于 {{ .date }}</time></div>
+    </article>
+    {{ end }}
+    <div class="os-digital-grid">
+      {{ range after 1 $archive.items }}
+      <article class="os-digital-card">
+        <a class="os-digital-cover os-digital-cover-type" href="{{ .url }}" aria-label="阅读归档：{{ .title }}"><span aria-hidden="true"><small>{{ .category }} / FROM THE ARCHIVE</small><strong>{{ .art }}</strong><em>{{ .caption }}</em></span></a>
+        <div class="os-digital-card-body"><div class="os-digital-card-meta"><span>{{ .category }}</span><time datetime="{{ .date }}">{{ .date }}</time></div><h3><a href="{{ .url }}">{{ .title }}</a></h3><p>{{ .summary }}</p><div class="os-digital-card-links"><a href="{{ .url }}">阅读归档 ↗</a><a href="{{ .telegram }}">Telegram 原帖 ↗</a></div></div>
+      </article>
+      {{ end }}
+    </div>
+    <aside class="os-digital-channel"><div><span class="os-eyebrow">ONE COLLECTION, TWO WAYS TO READ</span><h3>在频道里发现，在归档里重逢。</h3><p>去归档站搜索和回看，或在 Telegram 继续关注新的分享。</p></div><div class="os-digital-channel-actions"><a class="os-button" href="{{ $archive.url }}">打开完整归档 ↗</a><a href="{{ $archive.channel }}">关注 Telegram 频道 ↗</a></div></aside>
   </section>
   <section class="os-section" id="reading" aria-labelledby="reading-title">
-    <div class="os-section-head"><div><p class="os-eyebrow">SELECTED READING</p><h2 id="reading-title">精选阅读</h2></div><a href="{{ "archives/" | relURL }}">全部文章 ↗</a></div>
+    <div class="os-section-head"><div><p class="os-eyebrow">FROM MY NOTEBOOK</p><h2 id="reading-title">把发现用起来</h2></div><a href="{{ "archives/" | relURL }}">全部文章 ↗</a></div>
     <p class="os-digital-description">从站内实践记录开始，把发现变成可以使用的方法。</p>
     <div class="os-routes">{{ range site.Data.digital.reading }}{{ $page := site.GetPage .path }}<a class="os-route" href="{{ $page.RelPermalink }}"><span class="os-eyebrow">{{ .label }}</span><h3>{{ $page.Title }}</h3><p>{{ .note }}</p><small>阅读实践记录 ↗</small></a>{{ end }}</div>
   </section>
   <section class="os-section" id="practice" aria-labelledby="practice-title">
     <div class="os-section-head"><div><p class="os-eyebrow">MAKE IT PART OF YOUR DAY</p><h2 id="practice-title">工具与实践</h2></div></div>
     <div class="os-routes">
-      <a class="os-route" href="{{ (site.GetPage "/guides/digital-life").RelPermalink }}"><span class="os-eyebrow">GUIDE</span><h3>数字生活入门手册</h3><p>整理任务入口、设备分工与信息去处，从一次完整行动开始。</p><small>阅读原有手册 ↗</small></a>
+      <a class="os-route" href="{{ (site.GetPage "/guides/digital-life").RelPermalink }}"><span class="os-eyebrow">GUIDE</span><h3>数字生活入门手册</h3><p>整理任务入口、设备分工与信息去处，从一次完整行动开始。</p><small>阅读手册 ↗</small></a>
       <a class="os-route" href="{{ (site.GetPage "/projects/task-center").RelPermalink }}"><span class="os-eyebrow">WORKFLOW</span><h3>任务中心</h3><p>用开始、结束、完成与统计四个动作，组织一次专注。</p><small>查看实现情况与限制 ↗</small></a>
       <a class="os-route" href="{{ (site.GetPage "/projects/learning-os").RelPermalink }}"><span class="os-eyebrow">LEARNING</span><h3>Learning OS</h3><p>让 AI 参与诊断、练习和反馈，把每次学习留下来。</p><small>查看学习系统 ↗</small></a>
     </div>

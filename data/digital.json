@@ -1,22 +1,4 @@
 {
-  "directions": [
-    {
-      "title": "AI",
-      "description": "模型、Agent 与新的工作方式。"
-    },
-    {
-      "title": "Web3",
-      "description": "技术、应用与生态的变化。"
-    },
-    {
-      "title": "创业",
-      "description": "产品发现、独立开发与创造。"
-    },
-    {
-      "title": "成长",
-      "description": "学习、习惯与个人系统。"
-    }
-  ],
   "reading": [
     {
       "path": "/posts/skills-single-source-symlink",
@@ -34,21 +16,102 @@
       "note": "让身份对应具体行动，给习惯留下可以检查的痕迹。"
     }
   ],
-  "sources": [
-    {
-      "title": "少数派",
-      "url": "https://t.me/sspai",
-      "note": "数字生活与工具实践"
-    },
-    {
-      "title": "小众软件",
-      "url": "https://t.me/appinnfeed",
-      "note": "软件发现与使用场景"
-    },
-    {
-      "title": "APPDO 数字生活指南",
-      "url": "https://t.me/AppDoDo",
-      "note": "应用、工具与数字生活"
-    }
-  ]
+  "archive": {
+    "url": "https://share.cokelink.com",
+    "channel": "https://t.me/ainative_share",
+    "selected_at": "2026-09-27",
+    "items": [
+      {
+        "id": "ainative_share_87",
+        "category": "AI 工具",
+        "title": "TeamAI CLI：让团队的 AI 经验留下来",
+        "source_title": "腾讯团队把内部用了半年的 TeamAI CLI 开源了！",
+        "summary": "把 Skills、规则与知识统一管理，连接团队成员使用的不同 AI 编码工具。",
+        "note": "从个人配置走向团队共享，适合对照自己的 Agent 工作流阅读。",
+        "date": "2026-09-08",
+        "url": "https://share.cokelink.com/message/ainative_share_87",
+        "telegram": "https://t.me/ainative_share/87",
+        "art": "TEAM / AI",
+        "caption": "Shared knowledge."
+      },
+      {
+        "id": "ainative_share_85",
+        "category": "课程",
+        "title": "MIT 多模态 AI 课程",
+        "source_title": "探索多模态人工智能的前沿课来了——MIT「Modeling: MultiModal AI (MMAI)」春季课程视频已发布。| YouTube",
+        "summary": "从跨模态表示、对齐到推理与生成，了解多模态学习的核心问题。",
+        "note": "适合想系统学习多模态 AI 的读者。",
+        "date": "2026-09-08",
+        "url": "https://share.cokelink.com/message/ainative_share_85",
+        "telegram": "https://t.me/ainative_share/85",
+        "art": "MULTIMODAL",
+        "caption": "Language. Vision. Audio."
+      },
+      {
+        "id": "ainative_share_82",
+        "category": "技术指南",
+        "title": "网络代理与 VPN 应用详解",
+        "source_title": "开源项目：《网络代理与 VPN 应用详解》| github",
+        "summary": "从代理、隧道与 VPN 的基础原理出发，理解常见网络现象。",
+        "note": "把每天在用的工具，变成可以解释的原理。",
+        "date": "2026-09-08",
+        "url": "https://share.cokelink.com/message/ainative_share_82",
+        "telegram": "https://t.me/ainative_share/82",
+        "art": "CONNECTED",
+        "caption": "Understand the network."
+      },
+      {
+        "id": "ainative_share_78",
+        "category": "书籍",
+        "title": "从规律、预测到行动",
+        "source_title": "电子书 《Patterns, Predictions, and Actions: A Story About Machine Learning》…",
+        "summary": "Patterns, Predictions, and Actions：串联机器学习、数据评测与现实决策。",
+        "note": "建立机器学习的整体框架，关注模型如何影响真实世界。",
+        "date": "2026-09-06",
+        "url": "https://share.cokelink.com/message/ainative_share_78",
+        "telegram": "https://t.me/ainative_share/78",
+        "art": "PATTERNS",
+        "caption": "Predictions → Actions"
+      },
+      {
+        "id": "ainative_share_44",
+        "category": "开源工具",
+        "title": "Lieflat Charts：给数据一个好表达",
+        "source_title": "【让 AI 拥有顶级审美：Lieflat Charts 重新定义 Agent 的数据表达】",
+        "summary": "面向 AI Agent 的可视化 Skill，把数据转成图表与 HTML 报告。",
+        "note": "关注信息主次与阅读节奏，而不只是图表样式。",
+        "date": "2026-09-03",
+        "url": "https://share.cokelink.com/message/ainative_share_44",
+        "telegram": "https://t.me/ainative_share/44",
+        "art": "DATA / STORY",
+        "caption": "Make the numbers speak."
+      },
+      {
+        "id": "ainative_share_35",
+        "category": "成长资源",
+        "title": "工程师的长期成长书单",
+        "source_title": "200+ Resources to become a great engineering leader",
+        "summary": "一份覆盖系统设计、工程管理、AI 与产品思维的资源清单。",
+        "note": "按当前的问题挑选阅读，让资源清单服务于实际行动。",
+        "date": "2026-09-03",
+        "url": "https://share.cokelink.com/message/ainative_share_35",
+        "telegram": "https://t.me/ainative_share/35",
+        "art": "KEEP GROWING",
+        "caption": "Build. Learn. Repeat."
+      },
+      {
+        "id": "ainative_share_6",
+        "category": "学习方法",
+        "title": "重新整理你的英语学习方法",
+        "source_title": "有人把学英语这件事彻底搞明白了！",
+        "summary": "English Level Up Tips：频道中收录的一份英语学习指南。",
+        "note": "从学习目标与方法开始，为持续练习找到切入点。",
+        "date": "2026-08-28",
+        "url": "https://share.cokelink.com/message/ainative_share_6",
+        "telegram": "https://t.me/ainative_share/6",
+        "art": "EVERY DAY",
+        "caption": "A little goes a long way."
+      }
+    ]
+  }
 }
