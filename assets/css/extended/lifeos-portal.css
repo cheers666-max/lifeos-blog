@@ -151,3 +151,29 @@ body:has(.os-home) a:focus-visible, body:has(.os-home) button:focus-visible { ou
   .os-home * { transition: none !important; }
   .os-home a:hover { transform: none; }
 }
+
+/* Digital life: curated interests and practical reading share one destination. */
+.os-digital-intro { padding: 58px 0 34px; border-bottom: 1px solid var(--os-line); }
+.os-digital-intro h1 { font-size: clamp(36px,5vw,54px); letter-spacing: -.04em; margin-bottom: 16px; }
+.os-digital-intro > p:not(.os-eyebrow), .os-digital-description { color: var(--secondary); font-size: 15px; line-height: 1.9; }
+.os-digital-nav { display: flex; flex-wrap: wrap; gap: 12px 26px; margin-top: 26px; font-size: 13px; color: var(--os-accent); }
+.os-digital-nav a { padding: 8px 0; }
+.os-digital section { scroll-margin-top: 24px; }
+.os-digital-description { margin: -8px 0 25px; }
+.os-digital-directions { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 24px; margin-bottom: 28px; }
+.os-digital-directions > div { border-top: 2px solid var(--os-accent); padding-top: 16px; }
+.os-digital-directions h3 { font-size: 21px; font-weight: 600; }
+.os-digital-directions p { margin-top: 8px; color: var(--secondary); font-size: 13px; }
+.os-digital-channel { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 28px; background: var(--os-soft); border: 1px solid var(--os-line); border-radius: 12px; }
+.os-digital-channel .os-eyebrow { display: block; margin-bottom: 8px; }
+.os-digital-channel h3 { font-size: 23px; font-weight: 600; }
+.os-digital-channel p { font-size: 14px; color: var(--secondary); margin-top: 8px; }
+.os-digital-channel .os-button { flex-shrink: 0; }
+.os-digital-subhead { margin-top: 32px; margin-bottom: 18px; }
+.os-digital-subhead h3 { font-size: 18px; font-weight: 600; }
+.os-digital-subhead > span { font-size: 12px; color: var(--secondary); }
+@media (max-width: 700px) {
+  .os-digital-directions { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .os-digital-channel { flex-direction: column; align-items: flex-start; padding: 24px; }
+  .os-digital-intro { padding-top: 36px; }
+}

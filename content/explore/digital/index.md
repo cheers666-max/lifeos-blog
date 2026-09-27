@@ -1,16 +1,8 @@
-{
-  "title": "效率与数字生活",
-  "description": "从一次专注开始，整理快捷指令、设备入口与跨设备协作。",
-  "summary": "从一次专注开始，整理快捷指令、设备入口与跨设备协作。",
-  "date": "2026-09-27",
-  "ShowPostNavLinks": false,
-  "hideMeta": true
-}
-
-## 让工具配合你的节奏
-
-从一次专注开始，整理快捷指令、设备入口与跨设备协作。
-
-[阅读数字生活入门手册]({{< relref "guides/digital-life" >}})
-
-[了解任务中心：四个动作组织一次专注]({{< relref "projects/task-center" >}})
+---
+title: 数字生活
+description: 精选值得关注的信息，也记录把工具用进生活的实践。
+summary: AI、Web3、创业与成长的关注方向，精选阅读与数字生活实践。
+layout: digital
+hideMeta: true
+ShowPostNavLinks: false
+---

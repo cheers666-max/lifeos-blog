@@ -1,0 +1,54 @@
+{
+  "directions": [
+    {
+      "title": "AI",
+      "description": "模型、Agent 与新的工作方式。"
+    },
+    {
+      "title": "Web3",
+      "description": "技术、应用与生态的变化。"
+    },
+    {
+      "title": "创业",
+      "description": "产品发现、独立开发与创造。"
+    },
+    {
+      "title": "成长",
+      "description": "学习、习惯与个人系统。"
+    }
+  ],
+  "reading": [
+    {
+      "path": "/posts/skills-single-source-symlink",
+      "label": "AI 工具",
+      "note": "把多个 Agent 的技能整理成一份，减少重复维护。"
+    },
+    {
+      "path": "/posts/obsidian-learning-os-multi-device",
+      "label": "设备协作",
+      "note": "厘清同步边界，让学习记录在不同设备间可靠流转。"
+    },
+    {
+      "path": "/posts/identities-cover-each-other",
+      "label": "个人成长",
+      "note": "让身份对应具体行动，给习惯留下可以检查的痕迹。"
+    }
+  ],
+  "sources": [
+    {
+      "title": "少数派",
+      "url": "https://t.me/sspai",
+      "note": "数字生活与工具实践"
+    },
+    {
+      "title": "小众软件",
+      "url": "https://t.me/appinnfeed",
+      "note": "软件发现与使用场景"
+    },
+    {
+      "title": "APPDO 数字生活指南",
+      "url": "https://t.me/AppDoDo",
+      "note": "应用、工具与数字生活"
+    }
+  ]
+}

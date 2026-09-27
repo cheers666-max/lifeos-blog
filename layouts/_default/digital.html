@@ -1,0 +1,33 @@
+{{ define "main" }}
+<div class="os-home os-digital">
+  <header class="os-digital-intro">
+    <p class="os-eyebrow">DIGITAL LIFE / CURATED & PRACTICED</p>
+    <h1>{{ .Title }}</h1>
+    <p>{{ .Description }}</p>
+    <nav class="os-digital-nav" aria-label="数字生活页内导航">
+      <a href="#curated">关注精选 ↓</a><a href="#reading">精选阅读 ↓</a><a href="#practice">工具与实践 ↓</a>
+    </nav>
+  </header>
+  <section class="os-section" id="curated" aria-labelledby="curated-title">
+    <div class="os-section-head"><div><p class="os-eyebrow">ON MY RADAR</p><h2 id="curated-title">关注精选</h2></div></div>
+    <p class="os-digital-description">围绕 AI、Web3、创业与成长，收集值得进一步阅读和尝试的内容。</p>
+    <div class="os-digital-directions">{{ range site.Data.digital.directions }}<div><h3>{{ .title }}</h3><p>{{ .description }}</p></div>{{ end }}</div>
+    <aside class="os-digital-channel"><div><span class="os-eyebrow">TELEGRAM · @ainative_share</span><h3>在频道里，继续发现</h3><p>查看频道中的信息速览、摘要与原文链接。</p></div><a class="os-button" href="https://t.me/ainative_share">打开精选频道 ↗</a></aside>
+    <div class="os-section-head os-digital-subhead"><h3>数字生活信息源</h3><span>来自已有订阅</span></div>
+    <div class="os-routes">{{ range site.Data.digital.sources }}<a class="os-route" href="{{ .url }}"><h3>{{ .title }} ↗</h3><p>{{ .note }}</p><small>Telegram · 查看来源</small></a>{{ end }}</div>
+  </section>
+  <section class="os-section" id="reading" aria-labelledby="reading-title">
+    <div class="os-section-head"><div><p class="os-eyebrow">SELECTED READING</p><h2 id="reading-title">精选阅读</h2></div><a href="{{ "archives/" | relURL }}">全部文章 ↗</a></div>
+    <p class="os-digital-description">从站内实践记录开始，把发现变成可以使用的方法。</p>
+    <div class="os-routes">{{ range site.Data.digital.reading }}{{ $page := site.GetPage .path }}<a class="os-route" href="{{ $page.RelPermalink }}"><span class="os-eyebrow">{{ .label }}</span><h3>{{ $page.Title }}</h3><p>{{ .note }}</p><small>阅读实践记录 ↗</small></a>{{ end }}</div>
+  </section>
+  <section class="os-section" id="practice" aria-labelledby="practice-title">
+    <div class="os-section-head"><div><p class="os-eyebrow">MAKE IT PART OF YOUR DAY</p><h2 id="practice-title">工具与实践</h2></div></div>
+    <div class="os-routes">
+      <a class="os-route" href="{{ (site.GetPage "/guides/digital-life").RelPermalink }}"><span class="os-eyebrow">GUIDE</span><h3>数字生活入门手册</h3><p>整理任务入口、设备分工与信息去处，从一次完整行动开始。</p><small>阅读原有手册 ↗</small></a>
+      <a class="os-route" href="{{ (site.GetPage "/projects/task-center").RelPermalink }}"><span class="os-eyebrow">WORKFLOW</span><h3>任务中心</h3><p>用开始、结束、完成与统计四个动作，组织一次专注。</p><small>查看实现情况与限制 ↗</small></a>
+      <a class="os-route" href="{{ (site.GetPage "/projects/learning-os").RelPermalink }}"><span class="os-eyebrow">LEARNING</span><h3>Learning OS</h3><p>让 AI 参与诊断、练习和反馈，把每次学习留下来。</p><small>查看学习系统 ↗</small></a>
+    </div>
+  </section>
+</div>
+{{ end }}
