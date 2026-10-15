@@ -1,5 +1,6 @@
 baseURL: "https://cheers666-max.github.io/lifeos-blog/"
-locale: "zh-cn"
+languageCode: "zh-cn"                # <html lang> 输出值
+defaultContentLanguage: "zh"         # 必须 zh（不是 zh-cn）：Hugo 的 i18n 表与日期本地化按语言标签精确匹配，zh-cn 会落到默认表，月份/长日期退回英文
 title: "LifeOS"
 theme: "PaperMod"
 
