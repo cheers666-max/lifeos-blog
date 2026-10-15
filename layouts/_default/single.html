@@ -32,6 +32,14 @@
       </div>
       {{- end }}
     </header>
+
+    {{- /* 窄屏目录：侧栏 <1025px 隐藏，这里折叠成可展开的 details（桌面端 CSS 隐藏） */ -}}
+    {{- if $hasToc }}
+    <details class="toc-inline">
+      <summary>{{- i18n "toc" | default "目录" }}</summary>
+      <nav class="toc-nav" aria-label="{{ i18n "toc" | default "目录" }}">{{ .TableOfContents }}</nav>
+    </details>
+    {{- end }}
     {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param "cover.hidden") | default false }}
     {{- partial "cover.html" (dict "cxt" . "IsSingle" true "isHidden" $isHidden) }}
 

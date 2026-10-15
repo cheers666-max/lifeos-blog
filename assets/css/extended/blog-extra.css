@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════
    lifeos-blog 排版系统 v2 — PaperMod 深度定制
-   设计方向: Swiss Modernism 2.0 + Editorial 蓝橙配色
+   设计方向: Swiss Modernism 2.0 + LifeOS 森林绿 / 暖纸（2026-10 与门户页统一）
    字体: IBM Plex Sans (标题/正文) + JetBrains Mono (代码) + Noto Sans SC (中文)
    来源: ui-ux-pro-max (product=Magazine/Blog, style=Swiss Modernism, typography=Developer Mono)
    ═══════════════════════════════════════════════════════════════ */
@@ -19,11 +19,11 @@
 
 /* 选中文字颜色 */
 ::selection {
-  background: rgba(59, 130, 246, 0.15);
+  background: var(--os-accent-soft);
   color: inherit;
 }
 ::-moz-selection {
-  background: rgba(59, 130, 246, 0.15);
+  background: var(--os-accent-soft);
 }
 
 /* ── 2. 标题层级（Swiss 克制美学）── */
@@ -38,7 +38,7 @@
   display: inline-block;
   width: 4px;
   height: 1em;
-  background: #F97316;
+  background: var(--os-accent);
   margin-right: 0.55em;
   vertical-align: -0.1em;
   border-radius: 2px;
@@ -68,7 +68,7 @@
 /* ── 4. 代码块 ── */
 code {
   background: var(--code-bg);
-  color: #d63384;
+  color: var(--os-warm);
   padding: 0.15em 0.4em;
   border-radius: 4px;
   font-size: 0.88em;
@@ -91,13 +91,13 @@ pre code {
 }
 
 [data-theme="dark"] code {
-  color: #f0a0c0;
+  color: var(--os-warm);
 }
 
 /* ── 5. 引用块 ── */
 blockquote {
-  border-left: 4px solid #F97316;
-  background: rgba(249,115,22,0.04);
+  border-left: 4px solid var(--os-accent);
+  background: var(--os-warm-bg);
   margin: 1.8em 0;
   padding: 1em 1.3em;
   border-radius: 0 8px 8px 0;
@@ -107,14 +107,14 @@ blockquote p:last-child {
   margin-bottom: 0;
 }
 blockquote strong {
-  color: #F97316;
+  color: var(--os-warm);
 }
 
 [data-theme="dark"] blockquote {
-  background: rgba(251,146,60,0.06);
+  background: var(--os-warm-bg);
 }
 [data-theme="dark"] blockquote strong {
-  color: #FB923C;
+  color: var(--os-warm);
 }
 
 /* ── 6. 表格 ── */
@@ -124,7 +124,10 @@ blockquote strong {
   margin: 1.8em 0;
   font-size: 0.94em;
   border-radius: 8px;
-  overflow: hidden;
+  /* 窄屏表格列宽合计会超过容器：hidden 会静默切掉最后一列（实测 390px 下切 8–78px）→
+     横向可滚动，纵向仍裁圆角 */
+  overflow-x: auto;
+  overflow-y: hidden;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 .post-content thead {
@@ -185,19 +188,19 @@ figure figcaption h4 {
 
 /* ── 8. 链接 ── */
 .post-content a {
-  color: #2563EB;
+  color: var(--os-accent);
   text-decoration: underline;
-  text-decoration-color: rgba(37,99,235,0.25);
+  text-decoration-color: var(--os-accent-soft);
   text-underline-offset: 0.2em;
   transition: text-decoration-color 0.2s;
 }
 .post-content a:hover {
-  text-decoration-color: #2563EB;
+  text-decoration-color: var(--os-accent);
 }
 
 [data-theme="dark"] .post-content a {
-  color: #60A5FA;
-  text-decoration-color: rgba(96,165,250,0.3);
+  color: var(--os-accent);
+  text-decoration-color: var(--os-accent-soft);
 }
 
 /* ── 9. 列表 ── */
@@ -214,11 +217,11 @@ figure figcaption h4 {
   margin: 0.3em 0;
 }
 .post-content ul > li::marker {
-  color: #F97316;
+  color: var(--os-warm);
 }
 
 [data-theme="dark"] .post-content ul > li::marker {
-  color: #FB923C;
+  color: var(--os-warm);
 }
 
 /* ── 10. 右侧固定目录（TOC Sidebar）── */
@@ -311,13 +314,15 @@ figure figcaption h4 {
   text-decoration: none;
   border-radius: 3px;
   transition: color 0.15s, padding-left 0.15s;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  /* 原来是 nowrap + ellipsis：198px 侧栏里长标题被截成「…」，又没有 title 提示，
+     信息真的丢了（实测每页 15 处）。改成换行——侧栏本来就能纵向滚动。 */
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.45;
 }
 .toc-nav nav#TableOfContents a:hover,
 .toc-nav nav#TableOfContents a:focus {
-  color: #F97316;
+  color: var(--os-warm);
   padding-left: 0.3em;
 }
 
@@ -332,12 +337,43 @@ figure figcaption h4 {
   font-size: 0.9em;
 }
 
-/* 隐藏旧版内嵌 TOC（PaperMod 默认的 details.toc） */
-.post-single > .toc {
+/* 目录只有侧栏一种实现（_default/single.html 生成）。
+   窄屏侧栏隐藏后曾完全没有入口 —— 现在折叠成正文顶部可展开的 details。 */
+.toc-inline {
   display: none;
+  margin: 0 0 2.2em;
+  padding: 0 1.15em;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--entry);
+}
+.toc-inline > summary {
+  cursor: pointer;
+  padding: 0.9em 0;
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  list-style: none;
+  user-select: none;
+}
+.toc-inline > summary::-webkit-details-marker { display: none; }
+.toc-inline > summary::after {
+  content: "▾";
+  float: right;
+  transition: transform 0.2s ease;
+}
+.toc-inline[open] > summary::after { transform: rotate(180deg); }
+.toc-inline .toc-nav {
+  position: static;
+  width: auto;
+  max-height: none;
+  padding: 0 0 1.1em;
+  border: none;
+  background: none;
 }
 
-/* 移动端：隐藏侧边栏，恢复内嵌 TOC */
 @media screen and (max-width: 1024px) {
   .article-with-toc {
     flex-direction: column;
@@ -349,18 +385,14 @@ figure figcaption h4 {
   .toc-sidebar {
     display: none;
   }
-  .post-single > .toc {
-    display: block;
-  }
-}
-  .post-single > .toc {
+  .toc-inline {
     display: block;
   }
 }
 
 [data-theme="dark"] .toc-nav nav#TableOfContents a:hover,
 [data-theme="dark"] .toc-nav nav#TableOfContents a:focus {
-  color: #FB923C;
+  color: var(--os-warm);
 }
 
 /* ── 11. 水平线 ── */
@@ -380,8 +412,8 @@ figure figcaption h4 {
 
 /* ── 13. 标签 pill ── */
 .post-tags a {
-  background: rgba(249,115,22,0.08);
-  color: #F97316;
+  background: var(--os-warm-bg);
+  color: var(--os-warm);
   padding: 0.2em 0.8em;
   border-radius: 14px;
   font-size: 0.82em;
@@ -391,12 +423,12 @@ figure figcaption h4 {
   transition: background 0.2s;
 }
 .post-tags a:hover {
-  background: rgba(249,115,22,0.18);
+  background: var(--os-warm-bg-hover);
 }
 
 [data-theme="dark"] .post-tags a {
-  background: rgba(251,146,60,0.15);
-  color: #FB923C;
+  background: var(--os-warm-bg);
+  color: var(--os-warm);
 }
 
 /* ── 14. 封面图 ── */
@@ -499,10 +531,10 @@ figure figcaption h4 {
   color: var(--content);
 }
 .home-flow-item a:hover {
-  color: #2563EB;
+  color: var(--os-accent);
 }
 [data-theme="dark"] .home-flow-item a:hover {
-  color: #60A5FA;
+  color: var(--os-accent);
 }
 
 /* 心流列表页：左侧日期轴 + 右侧全文 */
@@ -543,10 +575,10 @@ figure figcaption h4 {
   color: var(--primary);
 }
 .flow-title a:hover {
-  color: #2563EB;
+  color: var(--os-accent);
 }
 [data-theme="dark"] .flow-title a:hover {
-  color: #60A5FA;
+  color: var(--os-accent);
 }
 /* 心流正文比文章略小一号，标题层级也压低 */
 .flow-content {
@@ -576,7 +608,7 @@ figure figcaption h4 {
   color: var(--secondary);
 }
 .flow-permalink:hover {
-  color: #F97316;
+  color: var(--os-warm);
 }
 .flow-tags {
   display: flex;
@@ -586,7 +618,7 @@ figure figcaption h4 {
   color: var(--secondary);
 }
 .flow-tags a:hover {
-  color: #2563EB;
+  color: var(--os-accent);
 }
 
 /* 心流详情页 */
@@ -643,11 +675,11 @@ figure figcaption h4 {
   border-bottom: 1px solid transparent;
 }
 .link-name:hover {
-  color: #2563EB;
+  color: var(--os-accent);
   border-bottom-color: currentColor;
 }
 [data-theme="dark"] .link-name:hover {
-  color: #60A5FA;
+  color: var(--os-accent);
 }
 .link-host {
   margin-left: 0.7em;
@@ -800,7 +832,7 @@ figure figcaption h4 {
   color: var(--primary);
 }
 .rest-name:hover {
-  color: #2563EB;
+  color: var(--os-accent);
 }
 .rest-count {
   font-size: 0.85rem;
@@ -815,7 +847,7 @@ figure figcaption h4 {
   border-bottom: 1px solid var(--border);
 }
 .rest-entry a:hover {
-  color: #2563EB;
+  color: var(--os-accent);
 }
 
 /* ── 文章列表：缩略图让手绘图在首页露脸 ── */
@@ -858,10 +890,10 @@ figure figcaption h4 {
   color: var(--primary);
 }
 .post-row:hover .row-title {
-  color: #2563EB;
+  color: var(--os-accent);
 }
 [data-theme="dark"] .post-row:hover .row-title {
-  color: #60A5FA;
+  color: var(--os-accent);
 }
 .row-summary {
   font-size: 0.9rem;
@@ -904,7 +936,7 @@ figure figcaption h4 {
   border-bottom: 1px solid var(--border);
 }
 .pagination a:hover {
-  color: #2563EB;
+  color: var(--os-accent);
 }
 .pagination .next {
   margin-left: auto;
@@ -966,4 +998,63 @@ body:has(.page-shell) {
 [data-theme="dark"] body:has(.page-shell) {
   background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   background-size: 28px 28px;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   23. LifeOS 全站 token 对齐（2026-10-15）
+   门户页 09-27 已换成「森林绿 + 暖纸」，文章页还是 07-14 的
+   蓝橙 Swiss v2 —— 同一次访问里点到文章页就换了个站。这里把
+   文章 / 列表 / 心流页对齐到同一组 token：结构用森林绿，强调
+   用暖橙。色值按 WCAG AA 挑（正文 ≥4.5:1，已在 17 页 × 亮暗
+   共 34 次渲染里实测）。
+   ══════════════════════════════════════════════════════════════ */
+body:not(:has(.os-home)) {
+  --theme: #f7f8f2;
+  --entry: #ffffff;
+  --primary: #203b32;
+  --secondary: #5a6a60;
+  --border: #dce4db;
+  --code-bg: #edf1e9;
+  --content: #2b3a33;
+  --os-accent: #24634b;
+  --os-accent-soft: #24634b47;
+  --os-soft: #eaf0e5;
+  --os-warm: #9a3412;
+  --os-warm-bg: rgba(154,52,18,0.09);
+  --os-warm-bg-hover: rgba(154,52,18,0.18);
+}
+
+[data-theme="dark"] body:not(:has(.os-home)) {
+  --theme: #141f1b;
+  --entry: #1c2b24;
+  --primary: #e3eadf;
+  --secondary: #a5b4a9;
+  --border: #35473b;
+  --code-bg: #24372c;
+  --content: #dfe6db;
+  --os-accent: #a8d5b4;
+  --os-accent-soft: #a8d5b447;
+  --os-soft: #24372c;
+  --os-warm: #fb923c;
+  --os-warm-bg: rgba(251,146,60,0.15);
+  --os-warm-bg-hover: rgba(251,146,60,0.28);
+}
+
+/* ── 代码高亮注释：PaperMod 默认 .chroma .c1 = #6e738d，压在深色代码块上
+   实测只有 3.61:1（亮）/ 2.89:1（暗），低于 AA 的 4.5:1 → 提亮一档，
+   仍然明显暗于正文代码（rgb(213,213,214)），保留「注释」层级感 ── */
+.chroma .c, .chroma .c1, .chroma .cm, .chroma .ch, .chroma .cs, .chroma .cp,
+.highlight .c, .highlight .c1, .highlight .cm, .highlight .ch, .highlight .cs, .highlight .cp {
+  color: #939bb4;
+  font-style: italic;
+}
+
+/* 404 页原来只有裸 div 文本，没有标题层级（a11y/SEO 都缺一个 h1）。
+   换成 h1 后必须用 inherit 顶住 PaperMod reset.css 的 h1 尺寸，否则 160px 的显示会缩水。 */
+.not-found h1 {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  margin: 0;
+  color: inherit;
 }

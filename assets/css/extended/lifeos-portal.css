@@ -4,12 +4,16 @@ body:has(.os-home) {
   --theme: #f7f8f2;
   --entry: #ffffff;
   --primary: #203b32;
-  --secondary: #647269;
+  --secondary: #5a6a60;
   --border: #dce4db;
   --code-bg: #edf1e9;
   --os-accent: #24634b;
+  --os-accent-soft: #24634b47;
   --os-soft: #eaf0e5;
   --os-line: #dce4db;
+  --os-warm: #9a3412;
+  --os-warm-bg: rgba(154,52,18,0.09);
+  --os-warm-bg-hover: rgba(154,52,18,0.18);
   --os-shadow: 0 12px 32px #203b3208;
   background: var(--theme);
 }
@@ -21,8 +25,12 @@ body:has(.os-home) {
   --border: #35473b;
   --code-bg: #24372c;
   --os-accent: #a8d5b4;
+  --os-accent-soft: #a8d5b447;
   --os-soft: #24372c;
   --os-line: #35473b;
+  --os-warm: #fb923c;
+  --os-warm-bg: rgba(251,146,60,0.15);
+  --os-warm-bg-hover: rgba(251,146,60,0.28);
   --os-shadow: 0 12px 32px #00000012;
 }
 body:has(.os-home) ::selection { background: #9fcba766; color: inherit; }
@@ -83,7 +91,7 @@ body:has(.os-home) a:focus-visible, body:has(.os-home) button:focus-visible { ou
 .os-domain h3 { font-size: 21px; font-weight: 600; margin-bottom: 9px; }
 .os-card-link { display: block; font-size: 12px; margin-top: 22px; color: var(--os-accent); }
 .os-feature { --os-accent: #d8ebbc; --secondary: #c6d6c8; --os-line: #ffffff26; color: #f5f8ef; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; background: #234f3d; padding: 48px; border-radius: 16px; margin: 16px 0 8px; }
-.os-feature h2 { font-size: 44px; font-weight: 500; letter-spacing: -.045em; }
+.os-feature h2 { font-size: 44px; font-weight: 500; letter-spacing: -.045em; color: #f5f8ef; }
 .os-feature p { font-size: 15px; line-height: 1.85; color: var(--secondary); margin: 14px 0 26px; }
 .os-feature .os-button, [data-theme="dark"] .os-feature .os-button { color: #234f3d !important; }
 .os-feature ol { list-style: none; padding: 0; align-self: center; }
