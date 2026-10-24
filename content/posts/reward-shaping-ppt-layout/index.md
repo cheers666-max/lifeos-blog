@@ -11,6 +11,7 @@ TocOpen: true
 math: true
 cover:
   image: "01-eval-ceiling.png"
+  relative: true
   alt: "通过率饱和在 100%，而 clean rate 卡在 88%"
   caption: "指标满了，问题还在——这是所有 reward 设计的起点"
 ---
